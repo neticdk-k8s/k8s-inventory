@@ -1,4 +1,4 @@
-module github.com/netic-k8s/k8s-inventory
+module github.com/neticdk-k8s/k8s-inventory
 
 go 1.20
 
