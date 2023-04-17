@@ -12,7 +12,7 @@ import (
 type Inventory struct {
 	Cluster             *Cluster         `json:"cluster"`
 	Nodes               Nodes            `json:"nodes"`
-	Namespaces          Namespaces       `json:"namespacxs"`
+	Namespaces          Namespaces       `json:"namespaces"`
 	Tenants             Tenants          `json:"tenants"`
 	Workloads           *Workload        `json:"workloads"`
 	Storage             *Storage         `json:"storage"`
@@ -23,13 +23,14 @@ type Inventory struct {
 
 func NewInventory() *Inventory {
 	return &Inventory{
-		CollectedAt:     metav1.Time{Time: time.Now()},
 		Cluster:         NewCluster(),
-		CustomResources: NewCustomResources(),
-		Namespaces:      Namespaces{},
 		Nodes:           Nodes{},
+		Namespaces:      Namespaces{},
+		Tenants:         Tenants{},
 		Workloads:       NewWorkload(),
 		Storage:         NewStorage(),
+		CustomResources: NewCustomResources(),
+		CollectedAt:     metav1.Time{Time: time.Now()},
 	}
 }
 
