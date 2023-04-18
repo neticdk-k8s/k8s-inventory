@@ -3,8 +3,8 @@ module github.com/neticdk-k8s/k8s-inventory
 go 1.20
 
 require (
-	k8s.io/api v0.27.1
-	k8s.io/apimachinery v0.27.1
+	k8s.io/api v0.26.4
+	k8s.io/apimachinery v0.26.4
 )
 
 require (
