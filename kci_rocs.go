@@ -5,16 +5,16 @@ import (
 )
 
 type KCIRocks struct {
-	DBInstances []*DBInstance `json:"db_instances"`
+	DBInstances []*KCIRocksDBInstance `json:"db_instances"`
 }
 
 func NewKCIRocks() *KCIRocks {
 	return &KCIRocks{
-		DBInstances: make([]*DBInstance, 0),
+		DBInstances: make([]*KCIRocksDBInstance, 0),
 	}
 }
 
-type DBInstance struct {
+type KCIRocksDBInstance struct {
 	Name              string            `json:"name"`
 	Labels            map[string]string `json:"labels"`
 	Annotations       map[string]string `json:"annotations"`
@@ -25,8 +25,8 @@ type DBInstance struct {
 	Status            string            `json:"status"`
 }
 
-func NewDBInstance() *DBInstance {
-	return &DBInstance{
+func NewKCIRocksDBInstance() *KCIRocksDBInstance {
+	return &KCIRocksDBInstance{
 		Labels:      make(map[string]string, 0),
 		Annotations: make(map[string]string, 0),
 	}
