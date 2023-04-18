@@ -30,7 +30,7 @@ func NewPV() *PV {
 	}
 }
 
-func (i *PV) setPersistentVolumeSource(o v1.PersistentVolume) {
+func (i *PV) SetPersistentVolumeSource(o v1.PersistentVolume) {
 	switch {
 	case o.Spec.PersistentVolumeSource.GCEPersistentDisk != nil:
 		i.Source = "GCEPersistentDisk"
