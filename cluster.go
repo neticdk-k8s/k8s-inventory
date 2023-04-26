@@ -20,11 +20,11 @@ type Cluster struct {
 	CustomerID                    int    `json:"customer_id" validate:"required" db:"customer_id"`
 	BillingSubject                string `json:"billing_subject" validate:"oneof=operator provider tenant special" db:"billing_subject"`
 	BillingGranularity            string `json:"billing_granularity" validate:"oneof=cluster tenant" db:"billing_granularity"`
-	ClusterName                   string `json:"name" validate:"required" db:"cluster_name"`
-	ClusterFQDN                   string `json:"fqdn" validate:"omitempty,fqdn" db:"cluster_fqdn"`
+	Name                          string `json:"name" validate:"required" db:"name"`
+	FQDN                          string `json:"fqdn" validate:"omitempty,fqdn" db:"fqdn"`
 	ClusterType                   string `json:"cluster_type" validate:"required,oneof=dedicated shared custom" db:"cluster_type"`
-	ClusterDescription            string `json:"description" db:"cluster_description"`
-	ClusterResilienceZone         string `json:"resilience_zone" db:"cluster_resilience_zone"`
+	Description                   string `json:"description" db:"description"`
+	ResilienceZone                string `json:"resilience_zone" db:"resilience_zone"`
 	InfrastructureEnvironmentType string `json:"infrastructure_environment_type" validate:"required,oneof=dedicated shared hybrid other" db:"infrastructure_environment_type"`
 	EnvironmentName               string `json:"environment_name" db:"environment_name"`
 	HasTechnicalOperations        bool   `json:"has_technical_operations" db:"has_technical_operations"`
