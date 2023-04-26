@@ -8,7 +8,7 @@ type Cluster struct {
 	BuildDate   string `json:"build_date"`
 
 	// Where/on what is the cluster running
-	ClusterProvider        string `json:"cluster_provider"`
+	KubernetesProvider     string `json:"kubernetes_provider"`
 	InfrastructureProvider string `json:"infrastructure_provider"`
 
 	// Secure Cloud Stack Information
