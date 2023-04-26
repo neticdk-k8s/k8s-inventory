@@ -7,8 +7,8 @@ import (
 type Namespaces []*Namespace
 
 type Namespace struct {
-	Name              string            `json:"name"`
-	CreationTimestamp metav1.Time       `json:"creation_timestamp"`
+	Name              string            `json:"name" db:"name"`
+	CreationTimestamp metav1.Time       `json:"creation_timestamp" db:"creation_timestamp"`
 	Labels            map[string]string `json:"labels"`
 	Annotations       map[string]string `json:"annotations"`
 }

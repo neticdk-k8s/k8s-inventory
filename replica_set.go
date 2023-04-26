@@ -5,15 +5,15 @@ import (
 )
 
 type ReplicaSet struct {
-	Name              string            `json:"name"`
-	Namespace         string            `json:"namespace"`
-	CreationTimestamp metav1.Time       `json:"creation_timestamp"`
+	Name              string            `json:"name" db:"name"`
+	Namespace         string            `json:"namespace" db:"namespace"`
+	CreationTimestamp metav1.Time       `json:"creation_timestamp" db:"creation_timestamp"`
 	Labels            map[string]string `json:"labels"`
 	Annotations       map[string]string `json:"annotations"`
-	Replicas          *int32            `json:"replicas"`
+	Replicas          *int32            `json:"replicas" db:"replicas"`
 	Template          *PodTemplate      `json:"template"`
-	OwnerName         string            `json:"owner_name"`
-	OwnerKind         string            `json:"owner_kind"`
+	OwnerName         string            `json:"owner_name" db:"owner_name"`
+	OwnerKind         string            `json:"owner_kind" db:"owner_kind"`
 }
 
 func NewReplicaSet() *ReplicaSet {

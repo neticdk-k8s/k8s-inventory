@@ -5,15 +5,15 @@ import (
 )
 
 type StatefulSet struct {
-	Name              string            `json:"name"`
-	Namespace         string            `json:"namespace"`
-	CreationTimestamp metav1.Time       `json:"creation_timestamp"`
+	Name              string            `json:"name" db:"name"`
+	Namespace         string            `json:"namespace" db:"namespace"`
+	CreationTimestamp metav1.Time       `json:"creation_timestamp" db:"creation_timestamp"`
 	Labels            map[string]string `json:"labels"`
 	Annotations       map[string]string `json:"annotations"`
-	Replicas          *int32            `json:"replicas"`
+	Replicas          *int32            `json:"replicas" db:"replicas"`
 	Template          *PodTemplate      `json:"template"`
-	ServiceName       string            `json:"service_name"`
-	UpdateStrategy    string            `json:"update_strategy"`
+	ServiceName       string            `json:"service_name" db:"service_name"`
+	UpdateStrategy    string            `json:"update_strategy" db:"update_strategy"`
 }
 
 func NewStatefulSet() *StatefulSet {

@@ -5,11 +5,11 @@ import (
 )
 
 type StorageClass struct {
-	Name              string            `json:"name"`
-	CreationTimestamp metav1.Time       `json:"creation_timestamp"`
+	Name              string            `json:"name" db:"name"`
+	CreationTimestamp metav1.Time       `json:"creation_timestamp" db:"creation_timestamp"`
 	Labels            map[string]string `json:"labels"`
 	Annotations       map[string]string `json:"annotations"`
-	Provisioner       string            `json:"provisioner"`
+	Provisioner       string            `json:"provisioner" db:"provisioner"`
 }
 
 func NewStorageClass() *StorageClass {

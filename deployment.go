@@ -5,13 +5,13 @@ import (
 )
 
 type Deployment struct {
-	Name              string            `json:"name"`
-	Namespace         string            `json:"namespace"`
-	CreationTimestamp metav1.Time       `json:"creation_timestamp"`
+	Name              string            `json:"name" db:"name"`
+	Namespace         string            `json:"namespace" db:"namespace"`
+	CreationTimestamp metav1.Time       `json:"creation_timestamp" db:"creation_timestamp"`
 	Labels            map[string]string `json:"labels"`
 	Annotations       map[string]string `json:"annotations"`
-	Replicas          *int32            `json:"replicas"`
-	Strategy          string            `json:"strategy"`
+	Replicas          *int32            `json:"replicas" db:"replicas"`
+	Strategy          string            `json:"strategy" db:"strategy"`
 	Template          *PodTemplate      `json:"template"`
 }
 

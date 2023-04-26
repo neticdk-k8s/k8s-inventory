@@ -15,12 +15,12 @@ func NewRabbitMQ() *RabbitMQ {
 }
 
 type RabbitMQCluster struct {
-	Name              string            `json:"name"`
-	Namespace         string            `json:"namespace"`
+	Name              string            `json:"name" db:"name"`
+	Namespace         string            `json:"namespace" db:"namespace"`
 	Labels            map[string]string `json:"labels"`
 	Annotations       map[string]string `json:"annotations"`
-	CreationTimestamp metav1.Time       `json:"creation_timestamp"`
-	Image             string            `json:"image"`
+	CreationTimestamp metav1.Time       `json:"creation_timestamp" db:"creation_timestamp"`
+	Image             string            `json:"image" db:"image"`
 }
 
 func NewRabbitMQCluster() *RabbitMQCluster {
