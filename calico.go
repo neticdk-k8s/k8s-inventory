@@ -5,13 +5,13 @@ import (
 )
 
 type Calico struct {
-	Labels            map[string]string `json:"labels" db:"labels"`
-	CreationTimestamp metav1.Time       `json:"creation_timestamp"`
-	Version           string            `json:"version"`
+	Labels            KubernetesLabels `json:"labels" db:"labels"`
+	CreationTimestamp metav1.Time      `json:"creation_timestamp"`
+	Version           string           `json:"version"`
 }
 
 func NewCalico() *Calico {
 	return &Calico{
-		Labels: make(map[string]string, 0),
+		Labels: make(KubernetesLabels, 0),
 	}
 }

@@ -5,16 +5,16 @@ import (
 )
 
 type StorageClass struct {
-	Name              string            `json:"name" db:"name"`
-	CreationTimestamp metav1.Time       `json:"creation_timestamp" db:"creation_timestamp"`
-	Labels            map[string]string `json:"labels" db:"labels"`
-	Annotations       map[string]string `json:"annotations" db:"annotations"`
-	Provisioner       string            `json:"provisioner" db:"provisioner"`
+	Name              string                `json:"name" db:"name"`
+	CreationTimestamp metav1.Time           `json:"creation_timestamp" db:"creation_timestamp"`
+	Labels            KubernetesLabels      `json:"labels" db:"labels"`
+	Annotations       KubernetesAnnotations `json:"annotations" db:"annotations"`
+	Provisioner       string                `json:"provisioner" db:"provisioner"`
 }
 
 func NewStorageClass() *StorageClass {
 	return &StorageClass{
-		Labels:      make(map[string]string, 0),
-		Annotations: make(map[string]string, 0),
+		Labels:      make(KubernetesLabels, 0),
+		Annotations: make(KubernetesAnnotations, 0),
 	}
 }

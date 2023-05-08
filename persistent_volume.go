@@ -6,27 +6,27 @@ import (
 )
 
 type PV struct {
-	Name              string            `json:"name" db:"name"`
-	CreationTimestamp metav1.Time       `json:"creation_timestamp" db:"creation_timestamp"`
-	Labels            map[string]string `json:"labels" db:"labels"`
-	Annotations       map[string]string `json:"annotations" db:"annotations"`
-	StorageClass      string            `json:"storage_class" db:"storage_class"`
-	Claim             string            `json:"claim" db:"claim"`
-	Status            string            `json:"status" db:"status"`
-	AccessModes       string            `json:"access_modes" db:"access_modes"`
-	VolumeMode        string            `json:"volume_mode" db:"volume_mode"`
-	Capacity          int64             `json:"capacity" db:"capacity"`
-	Source            string            `json:"source" db:"source"`
-	Driver            string            `json:"driver" db:"driver"`
-	Path              string            `json:"path" db:"path"`
-	FSType            string            `json:"fs_type" db:"fs_type"`
-	VolumeID          string            `json:"volume_id" db:"volume_id"`
+	Name              string                `json:"name" db:"name"`
+	CreationTimestamp metav1.Time           `json:"creation_timestamp" db:"creation_timestamp"`
+	Labels            KubernetesLabels      `json:"labels" db:"labels"`
+	Annotations       KubernetesAnnotations `json:"annotations" db:"annotations"`
+	StorageClass      string                `json:"storage_class" db:"storage_class"`
+	Claim             string                `json:"claim" db:"claim"`
+	Status            string                `json:"status" db:"status"`
+	AccessModes       string                `json:"access_modes" db:"access_modes"`
+	VolumeMode        string                `json:"volume_mode" db:"volume_mode"`
+	Capacity          int64                 `json:"capacity" db:"capacity"`
+	Source            string                `json:"source" db:"source"`
+	Driver            string                `json:"driver" db:"driver"`
+	Path              string                `json:"path" db:"path"`
+	FSType            string                `json:"fs_type" db:"fs_type"`
+	VolumeID          string                `json:"volume_id" db:"volume_id"`
 }
 
 func NewPV() *PV {
 	return &PV{
-		Labels:      make(map[string]string, 0),
-		Annotations: make(map[string]string, 0),
+		Labels:      make(KubernetesLabels, 0),
+		Annotations: make(KubernetesAnnotations, 0),
 	}
 }
 
