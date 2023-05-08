@@ -9,8 +9,8 @@ type Namespaces []*Namespace
 type Namespace struct {
 	Name              string            `json:"name" db:"name"`
 	CreationTimestamp metav1.Time       `json:"creation_timestamp" db:"creation_timestamp"`
-	Labels            map[string]string `json:"labels"`
-	Annotations       map[string]string `json:"annotations"`
+	Labels            map[string]string `json:"labels" db:"labels"`
+	Annotations       map[string]string `json:"annotations" db:"annotations"`
 }
 
 func NewNamespace() *Namespace {

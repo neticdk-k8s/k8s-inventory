@@ -17,8 +17,8 @@ func NewRabbitMQ() *RabbitMQ {
 type RabbitMQCluster struct {
 	Name              string            `json:"name" db:"name"`
 	Namespace         string            `json:"namespace" db:"namespace"`
-	Labels            map[string]string `json:"labels"`
-	Annotations       map[string]string `json:"annotations"`
+	Labels            map[string]string `json:"labels" db:"labels"`
+	Annotations       map[string]string `json:"annotations" db:"annotations"`
 	CreationTimestamp metav1.Time       `json:"creation_timestamp" db:"creation_timestamp"`
 	Image             string            `json:"image" db:"image"`
 }

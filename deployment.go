@@ -8,8 +8,8 @@ type Deployment struct {
 	Name              string            `json:"name" db:"name"`
 	Namespace         string            `json:"namespace" db:"namespace"`
 	CreationTimestamp metav1.Time       `json:"creation_timestamp" db:"creation_timestamp"`
-	Labels            map[string]string `json:"labels"`
-	Annotations       map[string]string `json:"annotations"`
+	Labels            map[string]string `json:"labels" db:"labels"`
+	Annotations       map[string]string `json:"annotations" db:"annotations"`
 	Replicas          *int32            `json:"replicas" db:"replicas"`
 	Strategy          string            `json:"strategy" db:"strategy"`
 	Template          *PodTemplate      `json:"template"`

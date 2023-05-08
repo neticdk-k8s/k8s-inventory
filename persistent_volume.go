@@ -8,8 +8,8 @@ import (
 type PV struct {
 	Name              string            `json:"name" db:"name"`
 	CreationTimestamp metav1.Time       `json:"creation_timestamp" db:"creation_timestamp"`
-	Labels            map[string]string `json:"labels"`
-	Annotations       map[string]string `json:"annotations"`
+	Labels            map[string]string `json:"labels" db:"labels"`
+	Annotations       map[string]string `json:"annotations" db:"annotations"`
 	StorageClass      string            `json:"storage_class" db:"storage_class"`
 	Claim             string            `json:"claim" db:"claim"`
 	Status            string            `json:"status" db:"status"`

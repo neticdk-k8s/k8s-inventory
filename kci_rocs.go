@@ -16,8 +16,8 @@ func NewKCIRocks() *KCIRocks {
 
 type KCIRocksDBInstance struct {
 	Name              string            `json:"name" db:"name"`
-	Labels            map[string]string `json:"labels"`
-	Annotations       map[string]string `json:"annotations"`
+	Labels            map[string]string `json:"labels" db:"labels"`
+	Annotations       map[string]string `json:"annotations" db:"annotations"`
 	CreationTimestamp metav1.Time       `json:"creation_timestamp" db:"creation_timestamp"`
 	Engine            string            `json:"engine" db:"engine"`
 	Host              string            `json:"host" db:"host"`
