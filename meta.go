@@ -34,7 +34,7 @@ type OwnerReference struct {
 	Kind       string `json:"kind" db:"kind"`
 	APIVersion string `json:"api_version" db:"api_version"`
 	Name       string `json:"name" db:"name"`
-	Controller bool   `json:"controller" db:"controller"`
+	Controller *bool  `json:"controller" db:"controller"`
 }
 
 type KubernetesLabels map[string]string

@@ -17,6 +17,7 @@ type Node struct {
 	IsControlPlane bool   `json:"is_control_plane" db:"is_control_plane"`
 	TopologyRegion string `json:"topology_region" db:"topology_region"`
 	TopologyZone   string `json:"topology_zone" db:"topology_zone"`
+	Provider       string `json:"provider" db:"provider"`
 
 	KubeProxyVersion        string `json:"kube_proxy_version" db:"kube_proxy_version"`
 	KubeletVersion          string `json:"kubelet_version" db:"kubelet_version"`
