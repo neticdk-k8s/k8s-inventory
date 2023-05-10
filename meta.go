@@ -10,7 +10,7 @@ import (
 
 type ObjectMeta struct {
 	Name              string                `json:"name" db:"name"`
-	Namespace         string                `json:"namespace" db:"namespace"`
+	Namespace         string                `json:"namespace,omitempty" db:"namespace"`
 	CreationTimestamp metav1.Time           `json:"creation_timestamp" db:"creation_timestamp"`
 	Labels            KubernetesLabels      `json:"labels" db:"labels"`
 	Annotations       KubernetesAnnotations `json:"annotations" db:"annotations"`
