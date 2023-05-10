@@ -1,24 +1,37 @@
 package inventory
 
-import (
-	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
-)
-
 type Deployment struct {
-	Name              string                `json:"name" db:"name"`
-	Namespace         string                `json:"namespace" db:"namespace"`
-	CreationTimestamp metav1.Time           `json:"creation_timestamp" db:"creation_timestamp"`
-	Labels            KubernetesLabels      `json:"labels" db:"labels"`
-	Annotations       KubernetesAnnotations `json:"annotations" db:"annotations"`
-	Replicas          *int32                `json:"replicas" db:"replicas"`
-	Strategy          string                `json:"strategy" db:"strategy"`
-	Template          *PodTemplate          `json:"template"`
+	TypeMeta
+	ObjectMeta
+
+	Spec   DeploymenSpec    `json:"spec" db:"spec"`
+	Status DeploymentStatus `json:"status" db:"status"`
+}
+
+type DeploymenSpec struct {
+	Replicas *int32       `json:"replicas"`
+	Strategy string       `json:"strategy"`
+	Template *PodTemplate `json:"template"`
+}
+
+func NewDeploymentSpec() DeploymenSpec {
+	return DeploymenSpec{
+		Template: NewPodTemplate(),
+	}
+}
+
+type DeploymentStatus struct {
+	Replicas            *int32 `json:"replicas"`
+	ReadyReplicas       *int32 `json:"ready_replicas"`
+	UpdatedReplicas     *int32 `json:"updated_replicas"`
+	AvailableReplicas   *int32 `json:"available_replicas"`
+	UnavailableReplicas *int32 `json:"unavailable_replicas"`
 }
 
 func NewDeployment() *Deployment {
 	return &Deployment{
-		Labels:      make(KubernetesLabels, 0),
-		Annotations: make(KubernetesAnnotations, 0),
-		Template:    NewPodTemplate(),
+		ObjectMeta: NewObjectMeta(),
+		Spec:       NewDeploymentSpec(),
+		Status:     DeploymentStatus{},
 	}
 }

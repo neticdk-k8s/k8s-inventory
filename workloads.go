@@ -2,10 +2,10 @@ package inventory
 
 type Workload struct {
 	Deployments  []*Deployment  `json:"deployments"`
-	StatefulSets []*StatefulSet `json:"stateful_sets"`
-	DaemonSets   []*DaemonSet   `json:"daemon_sets"`
-	ReplicaSets  []*ReplicaSet  `json:"replica_sets"`
-	CronJobs     []*CronJob     `json:"cron_jobs"`
+	StatefulSets []*StatefulSet `json:"statefulsets"`
+	DaemonSets   []*DaemonSet   `json:"daemonsets"`
+	ReplicaSets  []*ReplicaSet  `json:"replicasets"`
+	CronJobs     []*CronJob     `json:"cronjobs"`
 }
 
 func NewWorkload() *Workload {
