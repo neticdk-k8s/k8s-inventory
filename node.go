@@ -40,7 +40,7 @@ type NodeSpec struct {
 }
 
 type NodeStatus struct {
-	NodeInfo corev1.NodeSystemInfo
+	NodeInfo corev1.NodeSystemInfo `json:"node_info"`
 }
 
 func NewNode() *Node {

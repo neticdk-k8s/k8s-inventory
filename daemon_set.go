@@ -1,23 +1,29 @@
 package inventory
 
-import (
-	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
-)
-
 type DaemonSet struct {
-	Name              string                `json:"name" db:"name"`
-	Namespace         string                `json:"namespace" db:"namespace"`
-	CreationTimestamp metav1.Time           `json:"creation_timestamp" db:"creation_timestamp"`
-	Labels            KubernetesLabels      `json:"labels" db:"labels"`
-	Annotations       KubernetesAnnotations `json:"annotations" db:"annotations"`
-	Template          *PodTemplate          `json:"template"`
-	UpdateStrategy    string                `json:"update_strategy" db:"update_strategy"`
+	TypeMeta
+	ObjectMeta
+
+	Spec   DaemonSetSpec   `json:"spec" db:"spec"`
+	Status DaemonSetStatus `json:"status" db:"status"`
+}
+
+type DaemonSetSpec struct {
+	Template       *PodTemplate `json:"template"`
+	UpdateStrategy string       `json:"update_strategy"`
+}
+
+type DaemonSetStatus struct {
+	CurrentNumberScheduled int32 `json:"current_number_scheduled"`
+	NumberMisscheduled     int32 `json:"number_misscheduled"`
+	DesiredNumberScheduled int32 `json:"desired_number_scheduled"`
 }
 
 func NewDaemonSet() *DaemonSet {
 	return &DaemonSet{
-		Labels:      make(KubernetesLabels, 0),
-		Annotations: make(KubernetesAnnotations, 0),
-		Template:    NewPodTemplate(),
+		ObjectMeta: NewObjectMeta(),
+		Spec: DaemonSetSpec{
+			Template: NewPodTemplate(),
+		},
 	}
 }

@@ -4,20 +4,14 @@ type Deployment struct {
 	TypeMeta
 	ObjectMeta
 
-	Spec   DeploymenSpec    `json:"spec" db:"spec"`
+	Spec   DeploymentSpec   `json:"spec" db:"spec"`
 	Status DeploymentStatus `json:"status" db:"status"`
 }
 
-type DeploymenSpec struct {
+type DeploymentSpec struct {
 	Replicas *int32       `json:"replicas"`
 	Strategy string       `json:"strategy"`
 	Template *PodTemplate `json:"template"`
-}
-
-func NewDeploymentSpec() DeploymenSpec {
-	return DeploymenSpec{
-		Template: NewPodTemplate(),
-	}
 }
 
 type DeploymentStatus struct {
@@ -31,7 +25,9 @@ type DeploymentStatus struct {
 func NewDeployment() *Deployment {
 	return &Deployment{
 		ObjectMeta: NewObjectMeta(),
-		Spec:       NewDeploymentSpec(),
-		Status:     DeploymentStatus{},
+		Spec: DeploymentSpec{
+			Template: NewPodTemplate(),
+		},
+		Status: DeploymentStatus{},
 	}
 }

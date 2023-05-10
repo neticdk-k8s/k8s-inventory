@@ -17,8 +17,9 @@ func NewVelero() *Velero {
 }
 
 type VeleroSchedule struct {
-	Name               string          `json:"name" db:"name"`
-	Namespace          string          `json:"namespace" db:"namespace"`
+	TypeMeta
+	ObjectMeta
+
 	Schedule           string          `json:"schedule" db:"schedule"`
 	ExcludedNamespaces []string        `json:"excluded_namespaces"`
 	SnapshotVolumes    *bool           `json:"snapshot_volumes" db:"snapshot_volumes"`
@@ -28,8 +29,9 @@ type VeleroSchedule struct {
 }
 
 type VeleroBackup struct {
-	Name                string          `json:"name" db:"name"`
-	Namespace           string          `json:"namespace" db:"namespace"`
+	TypeMeta
+	ObjectMeta
+
 	ScheduleName        string          `json:"schedule_name" db:"schedule_name"`
 	ExcludedNamespaces  []string        `json:"excluded_namespaces"`
 	StorageLocation     string          `json:"storage_location" db:"storage_location"`

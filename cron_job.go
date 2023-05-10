@@ -1,24 +1,32 @@
 package inventory
 
-import (
-	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
-)
+import metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 
 type CronJob struct {
-	Name              string                `json:"name" db:"name"`
-	Namespace         string                `json:"namespace" db:"namespace"`
-	CreationTimestamp metav1.Time           `json:"creation_timestamp" db:"creation_timestamp"`
-	Labels            KubernetesLabels      `json:"labels" db:"labels"`
-	Annotations       KubernetesAnnotations `json:"annotations" db:"annotations"`
-	Schedule          string                `json:"schedule" db:"schedule"`
-	ConcurrencyPolicy string                `json:"concurrency_policy" db:"concurrency_policy"`
-	Template          *PodTemplate          `json:"template"`
+	TypeMeta
+	ObjectMeta
+
+	Spec   CronJobSpec   `json:"spec" db:"spec"`
+	Status CronJobStatus `json:"status" db:"status"`
+}
+
+type CronJobSpec struct {
+	Schedule          string       `json:"schedule"`
+	ConcurrencyPolicy string       `json:"concurrency_policy"`
+	JobTemplate       *PodTemplate `json:"job_template"`
+}
+
+type CronJobStatus struct {
+	LastScheduleTime   *metav1.Time `json:"last_schedule_time"`
+	LastSuccessfulTime *metav1.Time `json:"last_successful_time"`
 }
 
 func NewCronJob() *CronJob {
 	return &CronJob{
-		Labels:      make(KubernetesLabels, 0),
-		Annotations: make(KubernetesAnnotations, 0),
-		Template:    NewPodTemplate(),
+		ObjectMeta: NewObjectMeta(),
+		Spec: CronJobSpec{
+			JobTemplate: NewPodTemplate(),
+		},
+		Status: CronJobStatus{},
 	}
 }
