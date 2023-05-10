@@ -19,11 +19,11 @@ type PV struct {
 }
 
 type PVSpec struct {
-	Capacity         int64    `json:"capacity"`
-	AccessModes      []string `json:"access_modes"`
-	Claim            string   `json:"claim"`
-	StorageClassName string   `json:"storage_class"`
-	VolumeMode       string   `json:"volume_mode"`
+	Capacity         int64  `json:"capacity"`
+	AccessModes      string `json:"access_modes"`
+	Claim            string `json:"claim"`
+	StorageClassName string `json:"storage_class"`
+	VolumeMode       string `json:"volume_mode"`
 }
 
 type PVStatus struct {
