@@ -23,6 +23,12 @@ type CronJobStatus struct {
 
 func NewCronJob() *CronJob {
 	return &CronJob{
+		TypeMeta: TypeMeta{
+			Kind:         "CronJob",
+			APIGroup:     "batch",
+			APIVersion:   "v1",
+			ResourceType: "cronjobs",
+		},
 		ObjectMeta: NewObjectMeta(),
 		Spec: CronJobSpec{
 			JobTemplate: NewPodTemplate(),

@@ -1,23 +1,29 @@
 package inventory
 
-type Calico struct {
+type CalicoClusterInformation struct {
 	TypeMeta
 	ObjectMeta
 
-	Spec   CalicoSpec   `json:"spec" db:"spec"`
-	Status CalicoStatus `json:"status" db:"status"`
+	Spec   CalicoClusterInformationSpec   `json:"spec" db:"spec"`
+	Status CalicoClusterInformationStatus `json:"status" db:"status"`
 }
 
-type CalicoSpec struct {
+type CalicoClusterInformationSpec struct {
 	Version string `json:"version"`
 }
 
-type CalicoStatus struct{}
+type CalicoClusterInformationStatus struct{}
 
-func NewCalico() *Calico {
-	return &Calico{
+func NewCalicoClusterInformation() *CalicoClusterInformation {
+	return &CalicoClusterInformation{
+		TypeMeta: TypeMeta{
+			Kind:         "ClusterInformation",
+			APIGroup:     "crd.projectcalico.org",
+			APIVersion:   "v1",
+			ResourceType: "clusterinformations",
+		},
 		ObjectMeta: NewObjectMeta(),
-		Spec:       CalicoSpec{},
-		Status:     CalicoStatus{},
+		Spec:       CalicoClusterInformationSpec{},
+		Status:     CalicoClusterInformationStatus{},
 	}
 }
