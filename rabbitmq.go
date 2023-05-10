@@ -27,6 +27,12 @@ type RabbitMQClusterStatus struct{}
 
 func NewRabbitMQCluster() *RabbitMQCluster {
 	return &RabbitMQCluster{
+		TypeMeta: TypeMeta{
+			Kind:         "RabbitmqCluster",
+			APIGroup:     "rabbitmq.com",
+			APIVersion:   "v1beta1",
+			ResourceType: "rabbitmqclusters",
+		},
 		ObjectMeta: NewObjectMeta(),
 		Spec:       RabbitMQClusterSpec{},
 		Status:     RabbitMQClusterStatus{},

@@ -22,6 +22,12 @@ type ReplicaSetStatus struct {
 
 func NewReplicaSet() *ReplicaSet {
 	return &ReplicaSet{
+		TypeMeta: TypeMeta{
+			Kind:         "ReplicaSet",
+			APIGroup:     "apps",
+			APIVersion:   "v1",
+			ResourceType: "replicasets",
+		},
 		ObjectMeta: NewObjectMeta(),
 		Spec: ReplicaSetSpec{
 			Template: NewPodTemplate(),

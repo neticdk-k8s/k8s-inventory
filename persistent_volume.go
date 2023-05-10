@@ -33,6 +33,12 @@ type PersistentVolumeStatus struct {
 
 func NewPersistentVolume() *PersistentVolume {
 	return &PersistentVolume{
+		TypeMeta: TypeMeta{
+			Kind:         "PersistentVolume",
+			APIGroup:     "core",
+			APIVersion:   "v1",
+			ResourceType: "persistentvolumes",
+		},
 		ObjectMeta: NewObjectMeta(),
 		Spec:       PersistentVolumeSpec{},
 		Status:     PersistentVolumeStatus{},

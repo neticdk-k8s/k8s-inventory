@@ -28,6 +28,12 @@ type JobStatus struct {
 
 func NewJob() *Job {
 	return &Job{
+		TypeMeta: TypeMeta{
+			Kind:         "Job",
+			APIGroup:     "batch",
+			APIVersion:   "v1",
+			ResourceType: "jobs",
+		},
 		ObjectMeta: NewObjectMeta(),
 		Spec: JobSpec{
 			Template: NewPodTemplate(),

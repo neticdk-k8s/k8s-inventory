@@ -24,6 +24,12 @@ type DeploymentStatus struct {
 
 func NewDeployment() *Deployment {
 	return &Deployment{
+		TypeMeta: TypeMeta{
+			Kind:         "Deployment",
+			APIGroup:     "apps",
+			APIVersion:   "v1",
+			ResourceType: "deployments",
+		},
 		ObjectMeta: NewObjectMeta(),
 		Spec: DeploymentSpec{
 			Template: NewPodTemplate(),

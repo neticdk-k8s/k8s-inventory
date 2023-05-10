@@ -30,6 +30,12 @@ type KCIRocksDBInstanceStatus struct {
 
 func NewKCIRocksDBInstance() *KCIRocksDBInstance {
 	return &KCIRocksDBInstance{
+		TypeMeta: TypeMeta{
+			Kind:         "DBInstance",
+			APIGroup:     "kci.rocks",
+			APIVersion:   "v1alpha1",
+			ResourceType: "dbinstances",
+		},
 		ObjectMeta: NewObjectMeta(),
 		Spec:       KCIRocksDBInstanceSpec{},
 		Status:     KCIRocksDBInstanceStatus{},

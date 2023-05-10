@@ -25,6 +25,12 @@ type StatefulSetStatus struct {
 
 func NewStatefulSet() *StatefulSet {
 	return &StatefulSet{
+		TypeMeta: TypeMeta{
+			Kind:         "StatefulSet",
+			APIGroup:     "apps",
+			APIVersion:   "v1",
+			ResourceType: "statefulsets",
+		},
 		ObjectMeta: NewObjectMeta(),
 		Spec: StatefulSetSpec{
 			Template: NewPodTemplate(),

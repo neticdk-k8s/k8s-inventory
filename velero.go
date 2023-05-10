@@ -36,6 +36,20 @@ type VeleroScheduleStatus struct {
 	Phase      string       `json:"phase"`
 }
 
+func NewVeleroSchedule() *VeleroSchedule {
+	return &VeleroSchedule{
+		TypeMeta: TypeMeta{
+			Kind:         "Schedule",
+			APIGroup:     "velero.io",
+			APIVersion:   "v1",
+			ResourceType: "schedules",
+		},
+		ObjectMeta: NewObjectMeta(),
+		Spec:       VeleroScheduleSpec{},
+		Status:     VeleroScheduleStatus{},
+	}
+}
+
 type VeleroBackup struct {
 	TypeMeta
 	ObjectMeta
@@ -62,4 +76,18 @@ type VeleroBackupStatus struct {
 	Warnings            int          `json:"warnings"`
 	Errors              int          `json:"errors"`
 	Version             int          `json:"version"`
+}
+
+func NewVeleroBackup() *VeleroBackup {
+	return &VeleroBackup{
+		TypeMeta: TypeMeta{
+			Kind:         "Backup",
+			APIGroup:     "velero.io",
+			APIVersion:   "v1",
+			ResourceType: "backups",
+		},
+		ObjectMeta: NewObjectMeta(),
+		Spec:       VeleroBackupSpec{},
+		Status:     VeleroBackupStatus{},
+	}
 }

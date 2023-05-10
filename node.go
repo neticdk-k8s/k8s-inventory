@@ -45,6 +45,12 @@ type NodeStatus struct {
 
 func NewNode() *Node {
 	return &Node{
+		TypeMeta: TypeMeta{
+			Kind:         "Node",
+			APIGroup:     "core",
+			APIVersion:   "v1",
+			ResourceType: "nodes",
+		},
 		ObjectMeta: NewObjectMeta(),
 		Spec:       NodeSpec{},
 		Status:     NodeStatus{},

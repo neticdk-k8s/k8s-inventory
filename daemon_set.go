@@ -21,6 +21,12 @@ type DaemonSetStatus struct {
 
 func NewDaemonSet() *DaemonSet {
 	return &DaemonSet{
+		TypeMeta: TypeMeta{
+			Kind:         "DaemonSet",
+			APIGroup:     "apps",
+			APIVersion:   "v1",
+			ResourceType: "daemonsets",
+		},
 		ObjectMeta: NewObjectMeta(),
 		Spec: DaemonSetSpec{
 			Template: NewPodTemplate(),

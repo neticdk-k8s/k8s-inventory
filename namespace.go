@@ -15,6 +15,12 @@ type NamespaceStatus struct{}
 
 func NewNamespace() *Namespace {
 	return &Namespace{
+		TypeMeta: TypeMeta{
+			Kind:         "Namespace",
+			APIGroup:     "core",
+			APIVersion:   "v1",
+			ResourceType: "namespaces",
+		},
 		ObjectMeta: NewObjectMeta(),
 		Spec:       NamespaceSpec{},
 		Status:     NamespaceStatus{},
