@@ -6,6 +6,7 @@ type Workload struct {
 	DaemonSets   []*DaemonSet   `json:"daemonsets"`
 	ReplicaSets  []*ReplicaSet  `json:"replicasets"`
 	CronJobs     []*CronJob     `json:"cronjobs"`
+	Jobs         []*Job         `json:"jobs"`
 }
 
 func NewWorkload() *Workload {
@@ -15,5 +16,6 @@ func NewWorkload() *Workload {
 		DaemonSets:   make([]*DaemonSet, 0),
 		ReplicaSets:  make([]*ReplicaSet, 0),
 		CronJobs:     make([]*CronJob, 0),
+		Jobs:         make([]*Job, 0),
 	}
 }
