@@ -44,7 +44,7 @@ func NewVeleroSchedule() *VeleroSchedule {
 			APIVersion:   "v1",
 			ResourceType: "schedules",
 		},
-		ObjectMeta: NewObjectMeta(),
+		ObjectMeta: NewObjectMeta(metav1.ObjectMeta{}),
 		Spec:       VeleroScheduleSpec{},
 		Status:     VeleroScheduleStatus{},
 	}
@@ -86,7 +86,7 @@ func NewVeleroBackup() *VeleroBackup {
 			APIVersion:   "v1",
 			ResourceType: "backups",
 		},
-		ObjectMeta: NewObjectMeta(),
+		ObjectMeta: NewObjectMeta(metav1.ObjectMeta{}),
 		Spec:       VeleroBackupSpec{},
 		Status:     VeleroBackupStatus{},
 	}

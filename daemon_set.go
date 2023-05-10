@@ -1,5 +1,7 @@
 package inventory
 
+import metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
+
 type DaemonSet struct {
 	TypeMeta
 	ObjectMeta
@@ -27,7 +29,7 @@ func NewDaemonSet() *DaemonSet {
 			APIVersion:   "v1",
 			ResourceType: "daemonsets",
 		},
-		ObjectMeta: NewObjectMeta(),
+		ObjectMeta: NewObjectMeta(metav1.ObjectMeta{}),
 		Spec: DaemonSetSpec{
 			Template: NewPodTemplate(),
 		},

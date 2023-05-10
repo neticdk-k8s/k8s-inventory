@@ -1,5 +1,7 @@
 package inventory
 
+import metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
+
 type Namespaces []*Namespace
 
 type Namespace struct {
@@ -21,7 +23,7 @@ func NewNamespace() *Namespace {
 			APIVersion:   "v1",
 			ResourceType: "namespaces",
 		},
-		ObjectMeta: NewObjectMeta(),
+		ObjectMeta: NewObjectMeta(metav1.ObjectMeta{}),
 		Spec:       NamespaceSpec{},
 		Status:     NamespaceStatus{},
 	}

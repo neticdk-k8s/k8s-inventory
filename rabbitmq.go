@@ -1,5 +1,7 @@
 package inventory
 
+import metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
+
 type RabbitMQ struct {
 	Clusters []*RabbitMQCluster `json:"clusters"`
 }
@@ -33,7 +35,7 @@ func NewRabbitMQCluster() *RabbitMQCluster {
 			APIVersion:   "v1beta1",
 			ResourceType: "rabbitmqclusters",
 		},
-		ObjectMeta: NewObjectMeta(),
+		ObjectMeta: NewObjectMeta(metav1.ObjectMeta{}),
 		Spec:       RabbitMQClusterSpec{},
 		Status:     RabbitMQClusterStatus{},
 	}

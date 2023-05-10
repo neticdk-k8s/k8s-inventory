@@ -34,7 +34,7 @@ func NewJob() *Job {
 			APIVersion:   "v1",
 			ResourceType: "jobs",
 		},
-		ObjectMeta: NewObjectMeta(),
+		ObjectMeta: NewObjectMeta(metav1.ObjectMeta{}),
 		Spec: JobSpec{
 			Template: NewPodTemplate(),
 		},

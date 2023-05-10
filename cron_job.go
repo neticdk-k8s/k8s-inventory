@@ -29,7 +29,7 @@ func NewCronJob() *CronJob {
 			APIVersion:   "v1",
 			ResourceType: "cronjobs",
 		},
-		ObjectMeta: NewObjectMeta(),
+		ObjectMeta: NewObjectMeta(metav1.ObjectMeta{}),
 		Spec: CronJobSpec{
 			JobTemplate: NewPodTemplate(),
 		},

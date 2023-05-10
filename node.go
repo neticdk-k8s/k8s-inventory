@@ -2,6 +2,7 @@ package inventory
 
 import (
 	corev1 "k8s.io/api/core/v1"
+	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 )
 
 type Nodes []*Node
@@ -51,7 +52,7 @@ func NewNode() *Node {
 			APIVersion:   "v1",
 			ResourceType: "nodes",
 		},
-		ObjectMeta: NewObjectMeta(),
+		ObjectMeta: NewObjectMeta(metav1.ObjectMeta{}),
 		Spec:       NodeSpec{},
 		Status:     NodeStatus{},
 	}

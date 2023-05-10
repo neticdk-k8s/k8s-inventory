@@ -1,5 +1,7 @@
 package inventory
 
+import metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
+
 type ReplicaSet struct {
 	TypeMeta
 	ObjectMeta
@@ -28,7 +30,7 @@ func NewReplicaSet() *ReplicaSet {
 			APIVersion:   "v1",
 			ResourceType: "replicasets",
 		},
-		ObjectMeta: NewObjectMeta(),
+		ObjectMeta: NewObjectMeta(metav1.ObjectMeta{}),
 		Spec: ReplicaSetSpec{
 			Template: NewPodTemplate(),
 		},

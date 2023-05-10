@@ -1,5 +1,7 @@
 package inventory
 
+import metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
+
 type Deployment struct {
 	TypeMeta
 	ObjectMeta
@@ -30,7 +32,7 @@ func NewDeployment() *Deployment {
 			APIVersion:   "v1",
 			ResourceType: "deployments",
 		},
-		ObjectMeta: NewObjectMeta(),
+		ObjectMeta: NewObjectMeta(metav1.ObjectMeta{}),
 		Spec: DeploymentSpec{
 			Template: NewPodTemplate(),
 		},

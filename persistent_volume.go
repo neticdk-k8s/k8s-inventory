@@ -2,6 +2,7 @@ package inventory
 
 import (
 	v1 "k8s.io/api/core/v1"
+	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 )
 
 type PersistentVolume struct {
@@ -39,7 +40,7 @@ func NewPersistentVolume() *PersistentVolume {
 			APIVersion:   "v1",
 			ResourceType: "persistentvolumes",
 		},
-		ObjectMeta: NewObjectMeta(),
+		ObjectMeta: NewObjectMeta(metav1.ObjectMeta{}),
 		Spec:       PersistentVolumeSpec{},
 		Status:     PersistentVolumeStatus{},
 	}

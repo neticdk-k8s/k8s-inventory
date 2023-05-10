@@ -1,5 +1,7 @@
 package inventory
 
+import metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
+
 type StorageClass struct {
 	TypeMeta
 	ObjectMeta
@@ -15,6 +17,6 @@ func NewStorageClass() *StorageClass {
 			APIVersion:   "v1",
 			ResourceType: "storageclasses",
 		},
-		ObjectMeta: NewObjectMeta(),
+		ObjectMeta: NewObjectMeta(metav1.ObjectMeta{}),
 	}
 }

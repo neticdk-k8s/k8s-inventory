@@ -1,5 +1,7 @@
 package inventory
 
+import metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
+
 type KCIRocks struct {
 	DBInstances []*KCIRocksDBInstance `json:"db_instances"`
 }
@@ -36,7 +38,7 @@ func NewKCIRocksDBInstance() *KCIRocksDBInstance {
 			APIVersion:   "v1alpha1",
 			ResourceType: "dbinstances",
 		},
-		ObjectMeta: NewObjectMeta(),
+		ObjectMeta: NewObjectMeta(metav1.ObjectMeta{}),
 		Spec:       KCIRocksDBInstanceSpec{},
 		Status:     KCIRocksDBInstanceStatus{},
 	}

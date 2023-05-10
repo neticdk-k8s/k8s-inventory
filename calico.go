@@ -1,5 +1,7 @@
 package inventory
 
+import metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
+
 type CalicoClusterInformation struct {
 	TypeMeta
 	ObjectMeta
@@ -22,7 +24,7 @@ func NewCalicoClusterInformation() *CalicoClusterInformation {
 			APIVersion:   "v1",
 			ResourceType: "clusterinformations",
 		},
-		ObjectMeta: NewObjectMeta(),
+		ObjectMeta: NewObjectMeta(metav1.ObjectMeta{}),
 		Spec:       CalicoClusterInformationSpec{},
 		Status:     CalicoClusterInformationStatus{},
 	}

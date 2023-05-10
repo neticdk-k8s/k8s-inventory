@@ -17,11 +17,14 @@ type ObjectMeta struct {
 	OwnerReferences   []OwnerReference      `json:"owner_references" db:"owner_references"`
 }
 
-func NewObjectMeta() ObjectMeta {
+func NewObjectMeta(o metav1.ObjectMeta) ObjectMeta {
 	return ObjectMeta{
-		Labels:          make(KubernetesLabels, 0),
-		Annotations:     make(KubernetesAnnotations, 0),
-		OwnerReferences: make([]OwnerReference, 0),
+		Name:              o.Name,
+		Namespace:         o.Namespace,
+		Labels:            getLabels(o),
+		Annotations:       filterAnnotations(o),
+		CreationTimestamp: o.CreationTimestamp,
+		OwnerReferences:   getOwnerReferences(o),
 	}
 }
 
@@ -69,4 +72,36 @@ func (ka *KubernetesAnnotations) Scan(val interface{}) error {
 	}
 
 	return json.Unmarshal(b, &ka)
+}
+
+func filterAnnotations(o metav1.ObjectMeta) (a map[string]string) {
+	a = o.GetAnnotations()
+	if len(a) > 0 {
+		delete(a, "kubectl.kubernetes.io/last-applied-configuration")
+	} else {
+		a = make(map[string]string)
+	}
+	return a
+}
+
+func getOwnerReferences(o metav1.ObjectMeta) []OwnerReference {
+	refs := make([]OwnerReference, 0)
+	for _, v := range o.OwnerReferences {
+		ref := OwnerReference{
+			Kind:       v.Kind,
+			APIVersion: v.APIVersion,
+			Name:       v.Name,
+			Controller: v.Controller,
+		}
+		refs = append(refs, ref)
+	}
+	return refs
+}
+
+func getLabels(o metav1.ObjectMeta) map[string]string {
+	labels := o.GetLabels()
+	if len(labels) == 0 {
+		labels = make(map[string]string, 0)
+	}
+	return labels
 }

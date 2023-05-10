@@ -1,5 +1,7 @@
 package inventory
 
+import metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
+
 type StatefulSet struct {
 	TypeMeta
 	ObjectMeta
@@ -31,7 +33,7 @@ func NewStatefulSet() *StatefulSet {
 			APIVersion:   "v1",
 			ResourceType: "statefulsets",
 		},
-		ObjectMeta: NewObjectMeta(),
+		ObjectMeta: NewObjectMeta(metav1.ObjectMeta{}),
 		Spec: StatefulSetSpec{
 			Template: NewPodTemplate(),
 		},
