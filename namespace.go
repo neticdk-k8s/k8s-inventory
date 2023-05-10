@@ -1,21 +1,30 @@
 package inventory
 
-import (
-	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
-)
+import metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 
 type Namespaces []*Namespace
 
 type Namespace struct {
-	Name              string                `json:"name" db:"name"`
-	CreationTimestamp metav1.Time           `json:"creation_timestamp" db:"creation_timestamp"`
-	Labels            KubernetesLabels      `json:"labels" db:"labels"`
-	Annotations       KubernetesAnnotations `json:"annotations" db:"annotations"`
+	TypeMeta
+	ObjectMeta
+
+	Spec   NamespaceSpec   `json:"spec" db:"spec"`
+	Status NamespaceStatus `json:"status" db:"status"`
 }
+
+type NamespaceSpec struct{}
+type NamespaceStatus struct{}
 
 func NewNamespace() *Namespace {
 	return &Namespace{
-		Labels:      make(KubernetesLabels, 0),
-		Annotations: make(KubernetesAnnotations, 0),
+		TypeMeta: TypeMeta{
+			Kind:         "Namespace",
+			APIGroup:     "core",
+			APIVersion:   "v1",
+			ResourceType: "namespaces",
+		},
+		ObjectMeta: NewObjectMeta(metav1.ObjectMeta{}),
+		Spec:       NamespaceSpec{},
+		Status:     NamespaceStatus{},
 	}
 }

@@ -17,31 +17,77 @@ func NewVelero() *Velero {
 }
 
 type VeleroSchedule struct {
-	Name               string          `json:"name" db:"name"`
-	Namespace          string          `json:"namespace" db:"namespace"`
-	Schedule           string          `json:"schedule" db:"schedule"`
+	TypeMeta
+	ObjectMeta
+
+	Spec   VeleroScheduleSpec   `json:"spec" db:"spec"`
+	Status VeleroScheduleStatus `json:"status" db:"status"`
+}
+
+type VeleroScheduleSpec struct {
+	Schedule           string          `json:"schedule"`
 	ExcludedNamespaces []string        `json:"excluded_namespaces"`
-	SnapshotVolumes    *bool           `json:"snapshot_volumes" db:"snapshot_volumes"`
-	TTL                metav1.Duration `json:"ttl" db:"ttl"`
-	LastBackup         *metav1.Time    `json:"last_backup" db:"last_backup"`
-	Phase              string          `json:"phase" db:"phase"`
+	SnapshotVolumes    *bool           `json:"snapshot_volumes"`
+	TTL                metav1.Duration `json:"ttl"`
+}
+
+type VeleroScheduleStatus struct {
+	LastBackup *metav1.Time `json:"last_backup"`
+	Phase      string       `json:"phase"`
+}
+
+func NewVeleroSchedule() *VeleroSchedule {
+	return &VeleroSchedule{
+		TypeMeta: TypeMeta{
+			Kind:         "Schedule",
+			APIGroup:     "velero.io",
+			APIVersion:   "v1",
+			ResourceType: "schedules",
+		},
+		ObjectMeta: NewObjectMeta(metav1.ObjectMeta{}),
+		Spec:       VeleroScheduleSpec{},
+		Status:     VeleroScheduleStatus{},
+	}
 }
 
 type VeleroBackup struct {
-	Name                string          `json:"name" db:"name"`
-	Namespace           string          `json:"namespace" db:"namespace"`
-	ScheduleName        string          `json:"schedule_name" db:"schedule_name"`
-	ExcludedNamespaces  []string        `json:"excluded_namespaces"`
-	StorageLocation     string          `json:"storage_location" db:"storage_location"`
-	SnapshotVolumes     *bool           `json:"snapshot_volumes" db:"snapshot_volumes"`
-	TTL                 metav1.Duration `json:"ttl" db:"ttl"`
-	StartTimestamp      *metav1.Time    `json:"start_timestamp" db:"start_timestamp"`
-	CompletionTimestamp *metav1.Time    `json:"completion_timestamp" db:"completion_timestamp"`
-	Expiration          *metav1.Time    `json:"expiration" db:"expiration"`
-	Phase               string          `json:"phase" db:"phase"`
-	ItemsBackedUp       int             `json:"items_backed_up" db:"items_backed_up"`
-	TotalItems          int             `json:"total_items" db:"total_items"`
-	Warnings            int             `json:"warnings" db:"warnings"`
-	Errors              int             `json:"errors" db:"errors"`
-	Version             int             `json:"version" db:"version"`
+	TypeMeta
+	ObjectMeta
+
+	Spec   VeleroBackupSpec   `json:"spec" db:"spec"`
+	Status VeleroBackupStatus `json:"status" db:"status"`
+}
+
+type VeleroBackupSpec struct {
+	ScheduleName       string          `json:"schedule_name"`
+	ExcludedNamespaces []string        `json:"excluded_namespaces"`
+	StorageLocation    string          `json:"storage_location"`
+	SnapshotVolumes    *bool           `json:"snapshot_volumes"`
+	TTL                metav1.Duration `json:"ttl"`
+}
+
+type VeleroBackupStatus struct {
+	StartTimestamp      *metav1.Time `json:"start_timestamp"`
+	CompletionTimestamp *metav1.Time `json:"completion_timestamp"`
+	Expiration          *metav1.Time `json:"expiration"`
+	Phase               string       `json:"phase"`
+	ItemsBackedUp       int          `json:"items_backed_up"`
+	TotalItems          int          `json:"total_items"`
+	Warnings            int          `json:"warnings"`
+	Errors              int          `json:"errors"`
+	Version             int          `json:"version"`
+}
+
+func NewVeleroBackup() *VeleroBackup {
+	return &VeleroBackup{
+		TypeMeta: TypeMeta{
+			Kind:         "Backup",
+			APIGroup:     "velero.io",
+			APIVersion:   "v1",
+			ResourceType: "backups",
+		},
+		ObjectMeta: NewObjectMeta(metav1.ObjectMeta{}),
+		Spec:       VeleroBackupSpec{},
+		Status:     VeleroBackupStatus{},
+	}
 }

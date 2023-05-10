@@ -1,17 +1,31 @@
 package inventory
 
-import (
-	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
-)
+import metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 
-type Calico struct {
-	Labels            KubernetesLabels `json:"labels" db:"labels"`
-	CreationTimestamp metav1.Time      `json:"creation_timestamp"`
-	Version           string           `json:"version"`
+type CalicoClusterInformation struct {
+	TypeMeta
+	ObjectMeta
+
+	Spec   CalicoClusterInformationSpec   `json:"spec" db:"spec"`
+	Status CalicoClusterInformationStatus `json:"status" db:"status"`
 }
 
-func NewCalico() *Calico {
-	return &Calico{
-		Labels: make(KubernetesLabels, 0),
+type CalicoClusterInformationSpec struct {
+	Version string `json:"version"`
+}
+
+type CalicoClusterInformationStatus struct{}
+
+func NewCalicoClusterInformation() *CalicoClusterInformation {
+	return &CalicoClusterInformation{
+		TypeMeta: TypeMeta{
+			Kind:         "ClusterInformation",
+			APIGroup:     "crd.projectcalico.org",
+			APIVersion:   "v1",
+			ResourceType: "clusterinformations",
+		},
+		ObjectMeta: NewObjectMeta(metav1.ObjectMeta{}),
+		Spec:       CalicoClusterInformationSpec{},
+		Status:     CalicoClusterInformationStatus{},
 	}
 }
