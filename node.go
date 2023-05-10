@@ -36,7 +36,7 @@ type NodeSpec struct {
 	PodCIDRs      []string       `json:"pod_cidrs"`
 	ProviderID    string         `json:"provider_id"`
 	Unschedulable bool           `json:"unschedulable"`
-	Taints        []corev1.Taint `json:"taints"`
+	Taints        []corev1.Taint `json:"taints,omitempty"`
 }
 
 type NodeStatus struct {

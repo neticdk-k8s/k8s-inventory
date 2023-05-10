@@ -19,7 +19,7 @@ type JobSpec struct {
 
 type JobStatus struct {
 	StartTime      *metav1.Time `json:"start_time"`
-	CompletionTime *metav1.Time `json:"completion_time"`
+	CompletionTime *metav1.Time `json:"completion_time,omitempty"`
 	Active         int32        `json:"active"`
 	Ready          *int32       `json:"ready"`
 	Succeeded      int32        `json:"succeeded"`

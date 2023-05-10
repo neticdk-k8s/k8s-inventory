@@ -17,8 +17,8 @@ type CronJobSpec struct {
 }
 
 type CronJobStatus struct {
-	LastScheduleTime   *metav1.Time `json:"last_schedule_time"`
-	LastSuccessfulTime *metav1.Time `json:"last_successful_time"`
+	LastScheduleTime   *metav1.Time `json:"last_schedule_time,omitempty"`
+	LastSuccessfulTime *metav1.Time `json:"last_successful_time,omitempty"`
 }
 
 func NewCronJob() *CronJob {

@@ -29,7 +29,7 @@ type OwnerReference struct {
 	Kind       string `json:"kind"`
 	APIVersion string `json:"api_version"`
 	Name       string `json:"name"`
-	Controller *bool  `json:"controller"`
+	Controller *bool  `json:"controller,omitempty"`
 }
 
 type TypeMeta struct {
