@@ -29,11 +29,11 @@ type VeleroScheduleSpec struct {
 	ExcludedNamespaces []string        `json:"excluded_namespaces"`
 	SnapshotVolumes    *bool           `json:"snapshot_volumes"`
 	TTL                metav1.Duration `json:"ttl"`
-	LastBackup         *metav1.Time    `json:"last_backup"`
 }
 
 type VeleroScheduleStatus struct {
-	Phase string `json:"phase" db:"phase"`
+	LastBackup *metav1.Time `json:"last_backup"`
+	Phase      string       `json:"phase" db:"phase"`
 }
 
 type VeleroBackup struct {
