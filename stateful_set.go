@@ -29,5 +29,6 @@ func NewStatefulSet() *StatefulSet {
 		Spec: StatefulSetSpec{
 			Template: NewPodTemplate(),
 		},
+		Status: StatefulSetStatus{},
 	}
 }

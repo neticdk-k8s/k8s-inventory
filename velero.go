@@ -33,7 +33,7 @@ type VeleroScheduleSpec struct {
 
 type VeleroScheduleStatus struct {
 	LastBackup *metav1.Time `json:"last_backup"`
-	Phase      string       `json:"phase" db:"phase"`
+	Phase      string       `json:"phase"`
 }
 
 type VeleroBackup struct {
@@ -45,21 +45,21 @@ type VeleroBackup struct {
 }
 
 type VeleroBackupSpec struct {
-	ScheduleName       string          `json:"schedule_name" db:"schedule_name"`
+	ScheduleName       string          `json:"schedule_name"`
 	ExcludedNamespaces []string        `json:"excluded_namespaces"`
-	StorageLocation    string          `json:"storage_location" db:"storage_location"`
-	SnapshotVolumes    *bool           `json:"snapshot_volumes" db:"snapshot_volumes"`
-	TTL                metav1.Duration `json:"ttl" db:"ttl"`
+	StorageLocation    string          `json:"storage_location"`
+	SnapshotVolumes    *bool           `json:"snapshot_volumes"`
+	TTL                metav1.Duration `json:"ttl"`
 }
 
 type VeleroBackupStatus struct {
-	StartTimestamp      *metav1.Time `json:"start_timestamp" db:"start_timestamp"`
-	CompletionTimestamp *metav1.Time `json:"completion_timestamp" db:"completion_timestamp"`
-	Expiration          *metav1.Time `json:"expiration" db:"expiration"`
-	Phase               string       `json:"phase" db:"phase"`
-	ItemsBackedUp       int          `json:"items_backed_up" db:"items_backed_up"`
-	TotalItems          int          `json:"total_items" db:"total_items"`
-	Warnings            int          `json:"warnings" db:"warnings"`
-	Errors              int          `json:"errors" db:"errors"`
-	Version             int          `json:"version" db:"version"`
+	StartTimestamp      *metav1.Time `json:"start_timestamp"`
+	CompletionTimestamp *metav1.Time `json:"completion_timestamp"`
+	Expiration          *metav1.Time `json:"expiration"`
+	Phase               string       `json:"phase"`
+	ItemsBackedUp       int          `json:"items_backed_up"`
+	TotalItems          int          `json:"total_items"`
+	Warnings            int          `json:"warnings"`
+	Errors              int          `json:"errors"`
+	Version             int          `json:"version"`
 }

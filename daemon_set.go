@@ -25,5 +25,6 @@ func NewDaemonSet() *DaemonSet {
 		Spec: DaemonSetSpec{
 			Template: NewPodTemplate(),
 		},
+		Status: DaemonSetStatus{},
 	}
 }

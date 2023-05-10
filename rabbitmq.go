@@ -14,11 +14,21 @@ type RabbitMQCluster struct {
 	TypeMeta
 	ObjectMeta
 
-	Image string `json:"image" db:"image"`
+	Spec   RabbitMQClusterSpec   `json:"spec" db:"spec"`
+	Status RabbitMQClusterStatus `json:"status" db:"status"`
 }
+
+type RabbitMQClusterSpec struct {
+	Replicas *int32 `json:"replicas"`
+	Image    string `json:"image"`
+}
+
+type RabbitMQClusterStatus struct{}
 
 func NewRabbitMQCluster() *RabbitMQCluster {
 	return &RabbitMQCluster{
 		ObjectMeta: NewObjectMeta(),
+		Spec:       RabbitMQClusterSpec{},
+		Status:     RabbitMQClusterStatus{},
 	}
 }

@@ -14,14 +14,24 @@ type KCIRocksDBInstance struct {
 	TypeMeta
 	ObjectMeta
 
-	Engine string `json:"engine" db:"engine"`
-	Host   string `json:"host" db:"host"`
-	Port   uint16 `json:"port" db:"port"`
-	Status string `json:"status" db:"status"`
+	Spec   KCIRocksDBInstanceSpec   `json:"spec" db:"spec"`
+	Status KCIRocksDBInstanceStatus `json:"status" db:"status"`
+}
+
+type KCIRocksDBInstanceSpec struct {
+	Engine string `json:"engine"`
+	Host   string `json:"host"`
+	Port   uint16 `json:"port"`
+}
+
+type KCIRocksDBInstanceStatus struct {
+	Phase string `json:"status"`
 }
 
 func NewKCIRocksDBInstance() *KCIRocksDBInstance {
 	return &KCIRocksDBInstance{
 		ObjectMeta: NewObjectMeta(),
+		Spec:       KCIRocksDBInstanceSpec{},
+		Status:     KCIRocksDBInstanceStatus{},
 	}
 }

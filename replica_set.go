@@ -26,5 +26,6 @@ func NewReplicaSet() *ReplicaSet {
 		Spec: ReplicaSetSpec{
 			Template: NewPodTemplate(),
 		},
+		Status: ReplicaSetStatus{},
 	}
 }

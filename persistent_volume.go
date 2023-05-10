@@ -4,12 +4,12 @@ import (
 	v1 "k8s.io/api/core/v1"
 )
 
-type PV struct {
+type PersistentVolume struct {
 	TypeMeta
 	ObjectMeta
 
-	Spec   PVSpec   `json:"spec" db:"spec"`
-	Status PVStatus `json:"status" db:"status"`
+	Spec   PersistentVolumeSpec   `json:"spec" db:"spec"`
+	Status PersistentVolumeStatus `json:"status" db:"status"`
 
 	Source   string `json:"source" db:"source"`
 	Driver   string `json:"driver" db:"driver"`
@@ -18,7 +18,7 @@ type PV struct {
 	VolumeID string `json:"volume_id" db:"volume_id"`
 }
 
-type PVSpec struct {
+type PersistentVolumeSpec struct {
 	Capacity         int64  `json:"capacity"`
 	AccessModes      string `json:"access_modes"`
 	Claim            string `json:"claim"`
@@ -26,74 +26,74 @@ type PVSpec struct {
 	VolumeMode       string `json:"volume_mode"`
 }
 
-type PVStatus struct {
+type PersistentVolumeStatus struct {
 	Phase   string `json:"phase"`
 	Message string `json:"message"`
 }
 
-func NewPV() *PV {
-	return &PV{
+func NewPersistentVolume() *PersistentVolume {
+	return &PersistentVolume{
 		ObjectMeta: NewObjectMeta(),
-		Spec:       PVSpec{},
-		Status:     PVStatus{},
+		Spec:       PersistentVolumeSpec{},
+		Status:     PersistentVolumeStatus{},
 	}
 }
 
-func (i *PV) SetPersistentVolumeSource(o v1.PersistentVolume) {
+func (p *PersistentVolume) SetPersistentVolumeSource(o v1.PersistentVolume) {
 	switch {
 	case o.Spec.PersistentVolumeSource.GCEPersistentDisk != nil:
-		i.Source = "GCEPersistentDisk"
+		p.Source = "GCEPersistentDisk"
 	case o.Spec.PersistentVolumeSource.AWSElasticBlockStore != nil:
-		i.Source = "AWSElasticBlockStore"
-		i.FSType = o.Spec.PersistentVolumeSource.AWSElasticBlockStore.FSType
-		i.VolumeID = o.Spec.PersistentVolumeSource.AWSElasticBlockStore.VolumeID
+		p.Source = "AWSElasticBlockStore"
+		p.FSType = o.Spec.PersistentVolumeSource.AWSElasticBlockStore.FSType
+		p.VolumeID = o.Spec.PersistentVolumeSource.AWSElasticBlockStore.VolumeID
 	case o.Spec.PersistentVolumeSource.HostPath != nil:
-		i.Source = "HostPath"
-		i.Path = o.Spec.PersistentVolumeSource.HostPath.Path
+		p.Source = "HostPath"
+		p.Path = o.Spec.PersistentVolumeSource.HostPath.Path
 	case o.Spec.PersistentVolumeSource.Glusterfs != nil:
-		i.Source = "Glusterfs"
+		p.Source = "Glusterfs"
 	case o.Spec.PersistentVolumeSource.NFS != nil:
-		i.Source = "NFS"
+		p.Source = "NFS"
 	case o.Spec.PersistentVolumeSource.RBD != nil:
-		i.Source = "RBD"
+		p.Source = "RBD"
 	case o.Spec.PersistentVolumeSource.ISCSI != nil:
-		i.Source = "ISCSI"
+		p.Source = "ISCSI"
 	case o.Spec.PersistentVolumeSource.Cinder != nil:
-		i.Source = "Cinder"
+		p.Source = "Cinder"
 	case o.Spec.PersistentVolumeSource.CephFS != nil:
-		i.Source = "CephFS"
+		p.Source = "CephFS"
 	case o.Spec.PersistentVolumeSource.FC != nil:
-		i.Source = "FC"
+		p.Source = "FC"
 	case o.Spec.PersistentVolumeSource.Flocker != nil:
-		i.Source = "Flocker"
+		p.Source = "Flocker"
 	case o.Spec.PersistentVolumeSource.FlexVolume != nil:
-		i.Source = "FlexVolume"
+		p.Source = "FlexVolume"
 	case o.Spec.PersistentVolumeSource.AzureFile != nil:
-		i.Source = "AzureFile"
+		p.Source = "AzureFile"
 	case o.Spec.PersistentVolumeSource.VsphereVolume != nil:
-		i.Source = "VsphereVolume"
+		p.Source = "VsphereVolume"
 	case o.Spec.PersistentVolumeSource.Quobyte != nil:
-		i.Source = "Quobyte"
+		p.Source = "Quobyte"
 	case o.Spec.PersistentVolumeSource.AzureDisk != nil:
-		i.Source = "AzureDisk"
-		i.FSType = *o.Spec.PersistentVolumeSource.AzureDisk.FSType
+		p.Source = "AzureDisk"
+		p.FSType = *o.Spec.PersistentVolumeSource.AzureDisk.FSType
 	case o.Spec.PersistentVolumeSource.PhotonPersistentDisk != nil:
-		i.Source = "PhotonPersistentDisk"
+		p.Source = "PhotonPersistentDisk"
 	case o.Spec.PersistentVolumeSource.PortworxVolume != nil:
-		i.Source = "PortworxVolume"
+		p.Source = "PortworxVolume"
 	case o.Spec.PersistentVolumeSource.ScaleIO != nil:
-		i.Source = "ScaleIO"
+		p.Source = "ScaleIO"
 	case o.Spec.PersistentVolumeSource.Local != nil:
-		i.Source = "Local"
-		i.FSType = *o.Spec.PersistentVolumeSource.Local.FSType
-		i.Path = o.Spec.PersistentVolumeSource.Local.Path
+		p.Source = "Local"
+		p.FSType = *o.Spec.PersistentVolumeSource.Local.FSType
+		p.Path = o.Spec.PersistentVolumeSource.Local.Path
 	case o.Spec.PersistentVolumeSource.StorageOS != nil:
-		i.Source = "StorageOS"
+		p.Source = "StorageOS"
 	case o.Spec.PersistentVolumeSource.CSI != nil:
-		i.Source = "CSI"
-		i.FSType = o.Spec.PersistentVolumeSource.CSI.FSType
-		i.Driver = o.Spec.PersistentVolumeSource.CSI.Driver
+		p.Source = "CSI"
+		p.FSType = o.Spec.PersistentVolumeSource.CSI.FSType
+		p.Driver = o.Spec.PersistentVolumeSource.CSI.Driver
 	default:
-		i.Source = "Unknown"
+		p.Source = "Unknown"
 	}
 }
