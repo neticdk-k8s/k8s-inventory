@@ -21,11 +21,11 @@ func NewDeploymentSpec() DeploymenSpec {
 }
 
 type DeploymentStatus struct {
-	Replicas            *int32 `json:"replicas"`
-	ReadyReplicas       *int32 `json:"ready_replicas"`
-	UpdatedReplicas     *int32 `json:"updated_replicas"`
-	AvailableReplicas   *int32 `json:"available_replicas"`
-	UnavailableReplicas *int32 `json:"unavailable_replicas"`
+	Replicas            int32 `json:"replicas"`
+	ReadyReplicas       int32 `json:"ready_replicas"`
+	UpdatedReplicas     int32 `json:"updated_replicas"`
+	AvailableReplicas   int32 `json:"available_replicas"`
+	UnavailableReplicas int32 `json:"unavailable_replicas"`
 }
 
 func NewDeployment() *Deployment {
