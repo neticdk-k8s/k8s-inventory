@@ -26,8 +26,10 @@ func NewObjectMeta() ObjectMeta {
 }
 
 type TypeMeta struct {
-	Kind       string `json:"kind" db:"kind"`
-	APIVersion string `json:"api_version" db:"api_version"`
+	Kind         string `json:"kind" db:"kind"`
+	APIGroup     string `json:"api_group" db:"api_group"`
+	ResourceType string `json:"resource_type" db:"resource_type"`
+	APIVersion   string `json:"api_version" db:"api_version"`
 }
 
 type OwnerReference struct {
