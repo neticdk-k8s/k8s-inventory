@@ -2,14 +2,6 @@ package inventory
 
 import metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 
-type StatefulSet struct {
-	TypeMeta
-	ObjectMeta
-
-	Spec   StatefulSetSpec   `json:"spec" db:"spec"`
-	Status StatefulSetStatus `json:"status" db:"status"`
-}
-
 type StatefulSetSpec struct {
 	Replicas       *int32       `json:"replicas"`
 	Template       *PodTemplate `json:"template"`

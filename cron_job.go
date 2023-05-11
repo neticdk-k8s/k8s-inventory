@@ -2,14 +2,6 @@ package inventory
 
 import metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 
-type CronJob struct {
-	TypeMeta
-	ObjectMeta
-
-	Spec   CronJobSpec   `json:"spec" db:"spec"`
-	Status CronJobStatus `json:"status" db:"status"`
-}
-
 type CronJobSpec struct {
 	Schedule          string       `json:"schedule"`
 	ConcurrencyPolicy string       `json:"concurrency_policy"`

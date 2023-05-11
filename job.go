@@ -2,14 +2,6 @@ package inventory
 
 import metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 
-type Job struct {
-	TypeMeta
-	ObjectMeta
-
-	Spec   JobSpec   `json:"spec" db:"spec"`
-	Status JobStatus `json:"status" db:"status"`
-}
-
 type JobSpec struct {
 	Parallelism  *int32       `json:"parallelism"`
 	Completions  *int32       `json:"completions"`
