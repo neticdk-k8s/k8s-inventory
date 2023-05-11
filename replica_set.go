@@ -2,14 +2,6 @@ package inventory
 
 import metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 
-type ReplicaSet struct {
-	TypeMeta
-	ObjectMeta
-
-	Spec   ReplicaSetSpec   `json:"spec" db:"spec"`
-	Status ReplicaSetStatus `json:"status" db:"status"`
-}
-
 type ReplicaSetSpec struct {
 	Replicas *int32       `json:"replicas"`
 	Template *PodTemplate `json:"template"`
@@ -22,8 +14,8 @@ type ReplicaSetStatus struct {
 	AvailableReplicas    int32 `json:"available_replicas"`
 }
 
-func NewReplicaSet() *ReplicaSet {
-	return &ReplicaSet{
+func NewReplicaSet() *Workload {
+	return &Workload{
 		TypeMeta: TypeMeta{
 			Kind:         "ReplicaSet",
 			APIGroup:     "apps",

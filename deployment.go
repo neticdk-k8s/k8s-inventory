@@ -2,14 +2,6 @@ package inventory
 
 import metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 
-type Deployment struct {
-	TypeMeta
-	ObjectMeta
-
-	Spec   DeploymentSpec   `json:"spec" db:"spec"`
-	Status DeploymentStatus `json:"status" db:"status"`
-}
-
 type DeploymentSpec struct {
 	Replicas *int32       `json:"replicas"`
 	Strategy string       `json:"strategy"`
@@ -24,8 +16,8 @@ type DeploymentStatus struct {
 	UnavailableReplicas int32 `json:"unavailable_replicas"`
 }
 
-func NewDeployment() *Deployment {
-	return &Deployment{
+func NewDeployment() *Workload {
+	return &Workload{
 		TypeMeta: TypeMeta{
 			Kind:         "Deployment",
 			APIGroup:     "apps",

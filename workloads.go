@@ -1,21 +1,16 @@
 package inventory
 
+type Spec interface{}
+type Status interface{}
+
 type Workload struct {
-	Deployments  []*Deployment  `json:"deployments"`
-	StatefulSets []*StatefulSet `json:"statefulsets"`
-	DaemonSets   []*DaemonSet   `json:"daemonsets"`
-	ReplicaSets  []*ReplicaSet  `json:"replicasets"`
-	CronJobs     []*CronJob     `json:"cronjobs"`
-	Jobs         []*Job         `json:"jobs"`
+	TypeMeta
+	ObjectMeta
+
+	Spec   Spec   `json:"spec" db:"spec"`
+	Status Status `json:"status" db:"status"`
 }
 
-func NewWorkload() *Workload {
-	return &Workload{
-		Deployments:  make([]*Deployment, 0),
-		StatefulSets: make([]*StatefulSet, 0),
-		DaemonSets:   make([]*DaemonSet, 0),
-		ReplicaSets:  make([]*ReplicaSet, 0),
-		CronJobs:     make([]*CronJob, 0),
-		Jobs:         make([]*Job, 0),
-	}
+func NewWorkloads() []*Workload {
+	return make([]*Workload, 0)
 }
