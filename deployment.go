@@ -24,8 +24,8 @@ type DeploymentStatus struct {
 	UnavailableReplicas int32 `json:"unavailable_replicas"`
 }
 
-func NewDeployment() *Deployment {
-	return &Deployment{
+func NewDeployment() *Workload {
+	return &Workload{
 		TypeMeta: TypeMeta{
 			Kind:         "Deployment",
 			APIGroup:     "apps",

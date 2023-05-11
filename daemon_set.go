@@ -21,8 +21,8 @@ type DaemonSetStatus struct {
 	DesiredNumberScheduled int32 `json:"desired_number_scheduled"`
 }
 
-func NewDaemonSet() *DaemonSet {
-	return &DaemonSet{
+func NewDaemonSet() *Workload {
+	return &Workload{
 		TypeMeta: TypeMeta{
 			Kind:         "DaemonSet",
 			APIGroup:     "apps",

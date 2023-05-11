@@ -22,8 +22,8 @@ type ReplicaSetStatus struct {
 	AvailableReplicas    int32 `json:"available_replicas"`
 }
 
-func NewReplicaSet() *ReplicaSet {
-	return &ReplicaSet{
+func NewReplicaSet() *Workload {
+	return &Workload{
 		TypeMeta: TypeMeta{
 			Kind:         "ReplicaSet",
 			APIGroup:     "apps",

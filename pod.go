@@ -3,7 +3,7 @@ package inventory
 import (
 	"strings"
 
-	v1 "k8s.io/api/core/v1"
+	corev1 "k8s.io/api/core/v1"
 )
 
 type Pod struct {
@@ -15,7 +15,7 @@ type Pod struct {
 	SemanticVersion string `json:"semantic_version"`
 }
 
-func NewPod(pod v1.Pod) (pi *Pod) {
+func NewPod(pod corev1.Pod) (pi *Pod) {
 	pi = &Pod{
 		PodNameFull: pod.Name,
 		PodName:     pod.Name,

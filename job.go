@@ -26,8 +26,8 @@ type JobStatus struct {
 	Failed         int32        `json:"failed"`
 }
 
-func NewJob() *Job {
-	return &Job{
+func NewJob() *Workload {
+	return &Workload{
 		TypeMeta: TypeMeta{
 			Kind:         "Job",
 			APIGroup:     "batch",

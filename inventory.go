@@ -14,7 +14,7 @@ type Inventory struct {
 	Nodes               Nodes            `json:"nodes"`
 	Namespaces          Namespaces       `json:"namespaces"`
 	Tenants             Tenants          `json:"tenants"`
-	Workloads           *Workload        `json:"workloads"`
+	Workloads           []*Workload      `json:"workloads"`
 	Storage             *Storage         `json:"storage"`
 	CustomResources     *CustomResources `json:"custom_resources"`
 	CollectedAt         metav1.Time      `json:"collected_at" validate:"datetime"`
@@ -27,7 +27,7 @@ func NewInventory() *Inventory {
 		Nodes:           Nodes{},
 		Namespaces:      Namespaces{},
 		Tenants:         Tenants{},
-		Workloads:       NewWorkload(),
+		Workloads:       NewWorkloads(),
 		Storage:         NewStorage(),
 		CustomResources: NewCustomResources(),
 		CollectedAt:     metav1.Time{Time: time.Now()},

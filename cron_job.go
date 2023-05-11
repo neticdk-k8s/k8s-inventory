@@ -21,8 +21,8 @@ type CronJobStatus struct {
 	LastSuccessfulTime *metav1.Time `json:"last_successful_time,omitempty"`
 }
 
-func NewCronJob() *CronJob {
-	return &CronJob{
+func NewCronJob() *Workload {
+	return &Workload{
 		TypeMeta: TypeMeta{
 			Kind:         "CronJob",
 			APIGroup:     "batch",

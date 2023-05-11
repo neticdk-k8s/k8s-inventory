@@ -25,8 +25,8 @@ type StatefulSetStatus struct {
 	AvailableReplicas int32 `json:"available_replicas"`
 }
 
-func NewStatefulSet() *StatefulSet {
-	return &StatefulSet{
+func NewStatefulSet() *Workload {
+	return &Workload{
 		TypeMeta: TypeMeta{
 			Kind:         "StatefulSet",
 			APIGroup:     "apps",
