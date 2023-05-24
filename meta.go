@@ -14,7 +14,7 @@ type ObjectMeta struct {
 	CreationTimestamp metav1.Time           `json:"creation_timestamp" db:"creation_timestamp"`
 	Labels            KubernetesLabels      `json:"labels" db:"labels"`
 	Annotations       KubernetesAnnotations `json:"annotations" db:"annotations"`
-	OwnerReferences   []OwnerReference      `json:"owner_references" db:"owner_references"`
+	OwnerReferences   OwnerReferences       `json:"owner_references" db:"owner_references"`
 }
 
 func NewObjectMeta(o metav1.ObjectMeta) ObjectMeta {
@@ -28,11 +28,27 @@ func NewObjectMeta(o metav1.ObjectMeta) ObjectMeta {
 	}
 }
 
+type OwnerReferences []OwnerReference
+
 type OwnerReference struct {
 	Kind       string `json:"kind"`
 	APIVersion string `json:"api_version"`
 	Name       string `json:"name"`
 	Controller *bool  `json:"controller,omitempty"`
+}
+
+func (o *OwnerReferences) Scan(val interface{}) error {
+	b, ok := val.([]byte)
+	if !ok {
+		return errors.New("type assertion to []byte failed")
+	}
+
+	return json.Unmarshal(b, &o)
+}
+
+func (o *OwnerReferences) Value() (driver.Value, error) {
+	bytes, err := json.Marshal(o)
+	return bytes, err
 }
 
 type TypeMeta struct {

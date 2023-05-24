@@ -1,12 +1,32 @@
 package inventory
 
-import metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
+import (
+	"database/sql/driver"
+	"encoding/json"
+	"errors"
+
+	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
+)
 
 type JobSpec struct {
 	Parallelism  *int32       `json:"parallelism"`
 	Completions  *int32       `json:"completions"`
 	BackoffLimit *int32       `json:"backoff_limit"`
 	Template     *PodTemplate `json:"template"`
+}
+
+func (js *JobSpec) Value() (driver.Value, error) {
+	bytes, err := json.Marshal(js)
+	return bytes, err
+}
+
+func (js *JobSpec) Scan(val interface{}) error {
+	b, ok := val.([]byte)
+	if !ok {
+		return errors.New("type assertion to []byte failed")
+	}
+
+	return json.Unmarshal(b, &js)
 }
 
 type JobStatus struct {
@@ -16,6 +36,20 @@ type JobStatus struct {
 	Ready          *int32       `json:"ready"`
 	Succeeded      int32        `json:"succeeded"`
 	Failed         int32        `json:"failed"`
+}
+
+func (js *JobStatus) Value() (driver.Value, error) {
+	bytes, err := json.Marshal(js)
+	return bytes, err
+}
+
+func (js *JobStatus) Scan(val interface{}) error {
+	b, ok := val.([]byte)
+	if !ok {
+		return errors.New("type assertion to []byte failed")
+	}
+
+	return json.Unmarshal(b, &js)
 }
 
 func NewJob() *Workload {
