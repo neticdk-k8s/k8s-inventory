@@ -35,6 +35,20 @@ type OwnerReference struct {
 	Controller *bool  `json:"controller,omitempty"`
 }
 
+func (o *OwnerReference) Scan(val interface{}) error {
+	b, ok := val.([]byte)
+	if !ok {
+		return errors.New("type assertion to []byte failed")
+	}
+
+	return json.Unmarshal(b, &o)
+}
+
+func (o *OwnerReference) Value() (driver.Value, error) {
+	bytes, err := json.Marshal(o)
+	return bytes, err
+}
+
 type TypeMeta struct {
 	Kind         string `json:"kind" db:"kind"`
 	APIGroup     string `json:"api_group" db:"api_group"`
