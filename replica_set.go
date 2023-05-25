@@ -14,7 +14,7 @@ type ReplicaSetSpec struct {
 }
 
 func (rs *ReplicaSetSpec) Value() (driver.Value, error) {
-	bytes, err := json.Marshal(ds)
+	bytes, err := json.Marshal(rs)
 	return bytes, err
 }
 
@@ -24,7 +24,7 @@ func (rs *ReplicaSetSpec) Scan(val interface{}) error {
 		return errors.New("type assertion to []byte failed")
 	}
 
-	return json.Unmarshal(b, &ds)
+	return json.Unmarshal(b, &rs)
 }
 
 type ReplicaSetStatus struct {
