@@ -1,10 +1,30 @@
 package inventory
 
-import metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
+import (
+	"database/sql/driver"
+	"encoding/json"
+	"errors"
+
+	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
+)
 
 type ReplicaSetSpec struct {
 	Replicas *int32       `json:"replicas"`
 	Template *PodTemplate `json:"template"`
+}
+
+func (rs *ReplicaSetSpec) Value() (driver.Value, error) {
+	bytes, err := json.Marshal(ds)
+	return bytes, err
+}
+
+func (rs *ReplicaSetSpec) Scan(val interface{}) error {
+	b, ok := val.([]byte)
+	if !ok {
+		return errors.New("type assertion to []byte failed")
+	}
+
+	return json.Unmarshal(b, &ds)
 }
 
 type ReplicaSetStatus struct {
@@ -12,6 +32,20 @@ type ReplicaSetStatus struct {
 	FullyLabeledReplicas int32 `json:"fully_labeled_replicas"`
 	ReadyReplicas        int32 `json:"ready_replicas"`
 	AvailableReplicas    int32 `json:"available_replicas"`
+}
+
+func (rs *ReplicaSetStatus) Value() (driver.Value, error) {
+	bytes, err := json.Marshal(rs)
+	return bytes, err
+}
+
+func (rs *ReplicaSetStatus) Scan(val interface{}) error {
+	b, ok := val.([]byte)
+	if !ok {
+		return errors.New("type assertion to []byte failed")
+	}
+
+	return json.Unmarshal(b, &rs)
 }
 
 func NewReplicaSet() *Workload {
