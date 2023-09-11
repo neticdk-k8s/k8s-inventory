@@ -19,18 +19,20 @@ type Inventory struct {
 	CustomResources     *CustomResources `json:"custom_resources"`
 	CollectedAt         metav1.Time      `json:"collected_at" validate:"datetime"`
 	CollectionSucceeded bool             `json:"collection_succeeded"`
+	CollectionErrors    []string         `json:"collection_errors"`
 }
 
 func NewInventory() *Inventory {
 	return &Inventory{
-		Cluster:         NewCluster(),
-		Nodes:           Nodes{},
-		Namespaces:      Namespaces{},
-		Tenants:         Tenants{},
-		Workloads:       NewWorkloads(),
-		Storage:         NewStorage(),
-		CustomResources: NewCustomResources(),
-		CollectedAt:     metav1.Time{Time: time.Now()},
+		Cluster:          NewCluster(),
+		Nodes:            Nodes{},
+		Namespaces:       Namespaces{},
+		Tenants:          Tenants{},
+		Workloads:        NewWorkloads(),
+		Storage:          NewStorage(),
+		CustomResources:  NewCustomResources(),
+		CollectedAt:      metav1.Time{Time: time.Now()},
+		CollectionErrors: make([]string, 0),
 	}
 }
 
