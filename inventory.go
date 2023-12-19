@@ -24,7 +24,7 @@ type Inventory struct {
 	ClientCommit        string           `json:"client_commit"`
 }
 
-func NewInventory(clientVersion string, clientCommit string) *Inventory {
+func NewInventory() *Inventory {
 	return &Inventory{
 		Cluster:          NewCluster(),
 		Nodes:            Nodes{},
@@ -35,8 +35,6 @@ func NewInventory(clientVersion string, clientCommit string) *Inventory {
 		CustomResources:  NewCustomResources(),
 		CollectedAt:      metav1.Time{Time: time.Now()},
 		CollectionErrors: make([]string, 0),
-		ClientVersion:    clientVersion,
-		ClientCommit:     clientCommit,
 	}
 }
 
