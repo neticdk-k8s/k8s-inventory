@@ -20,9 +20,11 @@ type Inventory struct {
 	CollectedAt         metav1.Time      `json:"collected_at" validate:"datetime"`
 	CollectionSucceeded bool             `json:"collection_succeeded"`
 	CollectionErrors    []string         `json:"collection_errors"`
+	ClientVersion       string           `json:"client_version"`
+	ClientCommit        string           `json:"client_commit"`
 }
 
-func NewInventory() *Inventory {
+func NewInventory(clientVersion string, clientCommit string) *Inventory {
 	return &Inventory{
 		Cluster:          NewCluster(),
 		Nodes:            Nodes{},
@@ -33,6 +35,8 @@ func NewInventory() *Inventory {
 		CustomResources:  NewCustomResources(),
 		CollectedAt:      metav1.Time{Time: time.Now()},
 		CollectionErrors: make([]string, 0),
+		ClientVersion:    clientVersion,
+		ClientCommit:     clientCommit,
 	}
 }
 
