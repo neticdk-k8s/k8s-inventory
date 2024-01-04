@@ -21,7 +21,7 @@ type Cluster struct {
 	BillingSubject                string `json:"billing_subject" validate:"oneof=operator provider tenant special" db:"billing_subject"`
 	BillingGranularity            string `json:"billing_granularity" validate:"oneof=cluster tenant" db:"billing_granularity"`
 	Name                          string `json:"name" validate:"required" db:"name"`
-	ClusterSubscriptionID         int    `json:"cluster_subscription_id" validate:"required" db:"cluster_subscription_id"`
+	ClusterSubscriptionID         string `json:"cluster_subscription_id" validate:"required" db:"cluster_subscription_id"`
 	FQDN                          string `json:"fqdn" validate:"omitempty,fqdn" db:"fqdn"`
 	ClusterType                   string `json:"cluster_type" validate:"required,oneof=dedicated shared custom" db:"cluster_type"`
 	Description                   string `json:"description" db:"description"`
