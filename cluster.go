@@ -13,9 +13,9 @@ type Cluster struct {
 
 	// Secure Cloud Stack Information
 	OperatorName                  string `json:"operator_name" validate:"required" db:"operator_name"`
-	OperatorSubscriptionID        int    `json:"operator_subscription_id" validate:"required" db:"operator_subscription_id"`
+	OperatorSubscriptionID        string `json:"operator_subscription_id" validate:"required" db:"operator_subscription_id"`
 	ProviderName                  string `json:"provider_name" validate:"required" db:"provider_name"`
-	ProviderSubscriptionID        int    `json:"provider_subscription_id" validate:"required" db:"provider_subscription_id"`
+	ProviderSubscriptionID        string `json:"provider_subscription_id" validate:"required" db:"provider_subscription_id"`
 	CustomerName                  string `json:"customer_name" validate:"required" db:"customer_name"`
 	CustomerID                    int    `json:"customer_id" validate:"required" db:"customer_id"`
 	BillingSubject                string `json:"billing_subject" validate:"oneof=operator provider tenant special" db:"billing_subject"`
