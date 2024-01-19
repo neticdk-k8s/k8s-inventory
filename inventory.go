@@ -17,7 +17,7 @@ type Inventory struct {
 	Workloads           []*Workload      `json:"workloads"`
 	Storage             *Storage         `json:"storage"`
 	CustomResources     *CustomResources `json:"custom_resources"`
-	CollectedAt         metav1.Time      `json:"collected_at" validate:"datetime"`
+	CollectedAt         metav1.Time      `json:"collected_at"`
 	CollectionSucceeded bool             `json:"collection_succeeded"`
 	CollectionErrors    []string         `json:"collection_errors"`
 	ClientVersion       string           `json:"client_version"`
