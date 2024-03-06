@@ -90,6 +90,17 @@ func (ka *KubernetesAnnotations) Scan(val interface{}) error {
 	return json.Unmarshal(b, &ka)
 }
 
+type LabelSelectorRequirement struct {
+	Key      string   `json:"key"`
+	Operator string   `json:"label_selector_operator"`
+	Values   []string `json:"values"`
+}
+
+type LabelSelector struct {
+	MatchLabels      map[string]string          `json:"match_labels,omitempty"`
+	MatchExpressions []LabelSelectorRequirement `json:"match_expressions,omitempty"`
+}
+
 func filterAnnotations(o metav1.ObjectMeta) (a map[string]string) {
 	a = o.GetAnnotations()
 	if len(a) > 0 {
