@@ -16,6 +16,7 @@ type Inventory struct {
 	Tenants             Tenants          `json:"tenants"`
 	Workloads           []*Workload      `json:"workloads"`
 	Storage             *Storage         `json:"storage"`
+	NetworkPolicies     NetworkPolicies  `json:"network_policies"`
 	CustomResources     *CustomResources `json:"custom_resources"`
 	CollectedAt         metav1.Time      `json:"collected_at"`
 	CollectionSucceeded bool             `json:"collection_succeeded"`
@@ -29,6 +30,7 @@ func NewInventory() *Inventory {
 		Cluster:          NewCluster(),
 		Nodes:            Nodes{},
 		Namespaces:       Namespaces{},
+		NetworkPolicies:  NetworkPolicies{},
 		Tenants:          Tenants{},
 		Workloads:        NewWorkloads(),
 		Storage:          NewStorage(),
