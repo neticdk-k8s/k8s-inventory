@@ -40,7 +40,7 @@ type NetworkPolicyIngressRule struct {
 
 type NetworkPolicyEgressRule struct {
 	Ports []NetworkPolicyPort `json:"ports,omitempty"`
-	From  []NetworkPolicyPeer `json:"from,omitempty"`
+	To    []NetworkPolicyPeer `json:"from,omitempty"`
 }
 
 type NetworkPolicySpec struct {
