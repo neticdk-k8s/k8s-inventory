@@ -28,9 +28,9 @@ type IPBlock struct {
 	Except []string `json:"except,omitempty"`
 }
 type NetworkPolicyPeer struct {
-	PodSelector       LabelSelector `json:"pod_selector,omitempty"`
-	NamespaceSelector LabelSelector `json:"namespace_selector,omitempty"`
-	IPBlock           IPBlock       `json:"ip_block,omitempty"`
+	PodSelector       *LabelSelector `json:"pod_selector,omitempty"`
+	NamespaceSelector *LabelSelector `json:"namespace_selector,omitempty"`
+	IPBlock           *IPBlock       `json:"ip_block,omitempty"`
 }
 
 type NetworkPolicyIngressRule struct {
