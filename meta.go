@@ -92,13 +92,13 @@ func (ka *KubernetesAnnotations) Scan(val interface{}) error {
 
 type LabelSelectorRequirement struct {
 	Key      string   `json:"key"`
-	Operator string   `json:"label_selector_operator"`
-	Values   []string `json:"values"`
+	Operator string   `json:"operator"`
+	Values   []string `json:"values,omitempty"`
 }
 
 type LabelSelector struct {
-	MatchLabels      map[string]string          `json:"match_labels,omitempty"`
-	MatchExpressions []LabelSelectorRequirement `json:"match_expressions,omitempty"`
+	MatchLabels      map[string]string          `json:"matchLabels,omitempty"`
+	MatchExpressions []LabelSelectorRequirement `json:"matchExpressions,omitempty"`
 }
 
 func filterAnnotations(o metav1.ObjectMeta) (a map[string]string) {

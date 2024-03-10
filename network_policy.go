@@ -20,7 +20,7 @@ type NetworkPolicy struct {
 type NetworkPolicyPort struct {
 	Protocol *string      `json:"protocol,omitempty"`
 	Port     *IntOrString `json:"port,omitempty"`
-	EndPort  *int32       `json:"end_port,omitempty"`
+	EndPort  *int32       `json:"endPort,omitempty"`
 }
 
 type IPBlock struct {
@@ -28,9 +28,9 @@ type IPBlock struct {
 	Except []string `json:"except,omitempty"`
 }
 type NetworkPolicyPeer struct {
-	PodSelector       *LabelSelector `json:"pod_selector,omitempty"`
-	NamespaceSelector *LabelSelector `json:"namespace_selector,omitempty"`
-	IPBlock           *IPBlock       `json:"ip_block,omitempty"`
+	PodSelector       *LabelSelector `json:"podSelector,omitempty"`
+	NamespaceSelector *LabelSelector `json:"namespaceSelector,omitempty"`
+	IPBlock           *IPBlock       `json:"ipBlock,omitempty"`
 }
 
 type NetworkPolicyIngressRule struct {
@@ -44,10 +44,10 @@ type NetworkPolicyEgressRule struct {
 }
 
 type NetworkPolicySpec struct {
-	PodSelector LabelSelector              `json:"pod_selector"`
+	PodSelector LabelSelector              `json:"podSelector"`
 	Ingress     []NetworkPolicyIngressRule `json:"ingress,omitempty"`
 	Egress      []NetworkPolicyEgressRule  `json:"egress,omitempty"`
-	PolicyTypes []string                   `json:"policy_types,omitempty"`
+	PolicyTypes []string                   `json:"policyTypes,omitempty"`
 }
 
 func (nps *NetworkPolicySpec) Value() (driver.Value, error) {
