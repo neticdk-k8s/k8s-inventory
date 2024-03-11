@@ -63,9 +63,9 @@ func (npp *NetworkPolicyPort) UnmarshalJSON(data []byte) error {
 	}
 
 	var jsonNPP struct {
-		Protocol *string      `json:"protocol,omitempty"`
-		Port     *interface{} `json:"port,omitempty"`
-		EndPort  *int32       `json:"endPort,omitempty"`
+		Protocol *string     `json:"protocol,omitempty"`
+		Port     interface{} `json:"port,omitempty"`
+		EndPort  *int32      `json:"endPort,omitempty"`
 	}
 
 	if err := json.Unmarshal(data, &jsonNPP); err != nil {
@@ -74,18 +74,18 @@ func (npp *NetworkPolicyPort) UnmarshalJSON(data []byte) error {
 
 	var port *IntOrString
 
-	portVal := *jsonNPP.Port
+	portVal := jsonNPP.Port
 
 	switch v := portVal.(type) {
-	case *int32:
+	case float64:
 		port = &IntOrString{
 			Type:   0,
-			IntVal: *v,
+			IntVal: int32(v),
 		}
-	case *string:
+	case string:
 		port = &IntOrString{
 			Type:   1,
-			StrVal: *v,
+			StrVal: v,
 		}
 	}
 
