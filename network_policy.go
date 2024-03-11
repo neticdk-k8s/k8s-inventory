@@ -18,9 +18,9 @@ type NetworkPolicy struct {
 }
 
 type NetworkPolicyPort struct {
-	Protocol *string `json:"protocol,omitempty"`
-	Port     *string `json:"port,omitempty"`
-	EndPort  *string `json:"endPort,omitempty"`
+	Protocol *string      `json:"protocol,omitempty"`
+	Port     *IntOrString `json:"port,omitempty"`
+	EndPort  *int32       `json:"endPort,omitempty"`
 }
 
 type IPBlock struct {
