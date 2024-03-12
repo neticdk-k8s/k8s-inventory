@@ -10,7 +10,7 @@ import (
 
 type DaemonSetSpec struct {
 	Template       *PodTemplate `json:"template"`
-	UpdateStrategy string       `json:"update_strategy"`
+	UpdateStrategy string       `json:"updateStrategy"`
 }
 
 func (ds *DaemonSetSpec) Value() (driver.Value, error) {
@@ -28,9 +28,9 @@ func (ds *DaemonSetSpec) Scan(val interface{}) error {
 }
 
 type DaemonSetStatus struct {
-	CurrentNumberScheduled int32 `json:"current_number_scheduled"`
-	NumberMisscheduled     int32 `json:"number_misscheduled"`
-	DesiredNumberScheduled int32 `json:"desired_number_scheduled"`
+	CurrentNumberScheduled int32 `json:"currentNumberScheduled"`
+	NumberMisscheduled     int32 `json:"numberMisscheduled"`
+	DesiredNumberScheduled int32 `json:"desiredNumberScheduled"`
 }
 
 func (ds *DaemonSetStatus) Value() (driver.Value, error) {

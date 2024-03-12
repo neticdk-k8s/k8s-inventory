@@ -16,8 +16,8 @@ type RabbitMQCluster struct {
 	TypeMeta
 	ObjectMeta
 
-	Spec   RabbitMQClusterSpec   `json:"spec" db:"spec"`
-	Status RabbitMQClusterStatus `json:"status" db:"status"`
+	Spec   RabbitMQClusterSpec   `json:"spec"`
+	Status RabbitMQClusterStatus `json:"status"`
 }
 
 type RabbitMQClusterSpec struct {

@@ -9,12 +9,12 @@ import (
 )
 
 type ObjectMeta struct {
-	Name              string                `json:"name" db:"name"`
-	Namespace         string                `json:"namespace,omitempty" db:"namespace"`
-	CreationTimestamp metav1.Time           `json:"creation_timestamp" db:"creation_timestamp"`
-	Labels            KubernetesLabels      `json:"labels" db:"labels"`
-	Annotations       KubernetesAnnotations `json:"annotations" db:"annotations"`
-	OwnerReferences   OwnerReferences       `json:"owner_references" db:"owner_references"`
+	Name              string                `json:"name,omitempty"`
+	Namespace         string                `json:"namespace,omitempty"`
+	CreationTimestamp metav1.Time           `json:"creationTimestamp,omitempty"`
+	Labels            KubernetesLabels      `json:"labels,omitempty"`
+	Annotations       KubernetesAnnotations `json:"annotations,omitempty"`
+	OwnerReferences   OwnerReferences       `json:"ownerReferences,omitempty"`
 }
 
 func NewObjectMeta(o metav1.ObjectMeta) ObjectMeta {
@@ -32,7 +32,7 @@ type OwnerReferences []OwnerReference
 
 type OwnerReference struct {
 	Kind       string `json:"kind"`
-	APIVersion string `json:"api_version"`
+	APIVersion string `json:"apiVersion"`
 	Name       string `json:"name"`
 	Controller *bool  `json:"controller,omitempty"`
 }
@@ -52,10 +52,10 @@ func (o *OwnerReferences) Value() (driver.Value, error) {
 }
 
 type TypeMeta struct {
-	Kind         string `json:"kind" db:"kind"`
-	APIGroup     string `json:"api_group" db:"api_group"`
-	ResourceType string `json:"resource_type" db:"resource_type"`
-	APIVersion   string `json:"api_version" db:"api_version"`
+	Kind         string `json:"kind"`
+	APIGroup     string `json:"apiGroup"`
+	ResourceType string `json:"resourceType"`
+	APIVersion   string `json:"apiVersion"`
 }
 
 type KubernetesLabels map[string]string

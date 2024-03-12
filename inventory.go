@@ -13,7 +13,6 @@ type Inventory struct {
 	Cluster             *Cluster         `json:"cluster"`
 	Nodes               Nodes            `json:"nodes"`
 	Namespaces          Namespaces       `json:"namespaces"`
-	Tenants             Tenants          `json:"tenants"`
 	Workloads           []*Workload      `json:"workloads"`
 	Pods                []*Pod           `json:"pods"`
 	Storage             *Storage         `json:"storage"`
@@ -32,7 +31,6 @@ func NewInventory() *Inventory {
 		Nodes:            Nodes{},
 		Namespaces:       Namespaces{},
 		NetworkPolicies:  NetworkPolicies{},
-		Tenants:          Tenants{},
 		Workloads:        NewWorkloads(),
 		Storage:          NewStorage(),
 		CustomResources:  NewCustomResources(),

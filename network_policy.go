@@ -14,7 +14,7 @@ type NetworkPolicy struct {
 	TypeMeta
 	ObjectMeta
 
-	Spec NetworkPolicySpec `json:"spec" db:"spec"`
+	Spec NetworkPolicySpec `json:"spec"`
 }
 
 type NetworkPolicyPort struct {

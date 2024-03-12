@@ -29,9 +29,9 @@ func (rs *ReplicaSetSpec) Scan(val interface{}) error {
 
 type ReplicaSetStatus struct {
 	Replicas             int32 `json:"replicas"`
-	FullyLabeledReplicas int32 `json:"fully_labeled_replicas"`
-	ReadyReplicas        int32 `json:"ready_replicas"`
-	AvailableReplicas    int32 `json:"available_replicas"`
+	FullyLabeledReplicas int32 `json:"fullyLabeledReplicas"`
+	ReadyReplicas        int32 `json:"readyReplicas"`
+	AvailableReplicas    int32 `json:"availableReplicas"`
 }
 
 func (rs *ReplicaSetStatus) Value() (driver.Value, error) {

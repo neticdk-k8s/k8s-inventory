@@ -6,10 +6,10 @@ import (
 
 type PodTemplateContainer struct {
 	Image          string `json:"image"`
-	LimitsCPU      int64  `json:"limits_cpu"`
-	LimitsMemory   int64  `json:"limits_memory"`
-	RequestsCPU    int64  `json:"requests_cpu"`
-	RequestsMemory int64  `json:"requests_memory"`
+	LimitsCPU      int64  `json:"limitsCPU"`
+	LimitsMemory   int64  `json:"limitsMemory"`
+	RequestsCPU    int64  `json:"requestsCPU"`
+	RequestsMemory int64  `json:"requestsMemory"`
 }
 
 func NewPodTemplateContainer() *PodTemplateContainer {

@@ -10,8 +10,8 @@ import (
 
 type CronJobSpec struct {
 	Schedule          string       `json:"schedule"`
-	ConcurrencyPolicy string       `json:"concurrency_policy"`
-	JobTemplate       *PodTemplate `json:"job_template"`
+	ConcurrencyPolicy string       `json:"concurrencyPolicy"`
+	JobTemplate       *PodTemplate `json:"jobTemplate"`
 }
 
 func (cs *CronJobSpec) Value() (driver.Value, error) {
@@ -29,8 +29,8 @@ func (cs *CronJobSpec) Scan(val interface{}) error {
 }
 
 type CronJobStatus struct {
-	LastScheduleTime   *metav1.Time `json:"last_schedule_time,omitempty"`
-	LastSuccessfulTime *metav1.Time `json:"last_successful_time,omitempty"`
+	LastScheduleTime   *metav1.Time `json:"lastScheduleTime,omitempty"`
+	LastSuccessfulTime *metav1.Time `json:"lastSuccessfulTime,omitempty"`
 }
 
 func (cs *CronJobStatus) Value() (driver.Value, error) {

@@ -6,8 +6,8 @@ type CalicoClusterInformation struct {
 	TypeMeta
 	ObjectMeta
 
-	Spec   CalicoClusterInformationSpec   `json:"spec" db:"spec"`
-	Status CalicoClusterInformationStatus `json:"status" db:"status"`
+	Spec   CalicoClusterInformationSpec   `json:"spec"`
+	Status CalicoClusterInformationStatus `json:"status"`
 }
 
 type CalicoClusterInformationSpec struct {

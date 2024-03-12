@@ -11,7 +11,7 @@ import (
 type JobSpec struct {
 	Parallelism  *int32       `json:"parallelism"`
 	Completions  *int32       `json:"completions"`
-	BackoffLimit *int32       `json:"backoff_limit"`
+	BackoffLimit *int32       `json:"backoffLimit"`
 	Template     *PodTemplate `json:"template"`
 }
 
@@ -30,8 +30,8 @@ func (js *JobSpec) Scan(val interface{}) error {
 }
 
 type JobStatus struct {
-	StartTime      *metav1.Time `json:"start_time"`
-	CompletionTime *metav1.Time `json:"completion_time,omitempty"`
+	StartTime      *metav1.Time `json:"startTime"`
+	CompletionTime *metav1.Time `json:"completionTime,omitempty"`
 	Active         int32        `json:"active"`
 	Ready          *int32       `json:"ready"`
 	Succeeded      int32        `json:"succeeded"`
