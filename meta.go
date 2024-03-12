@@ -9,12 +9,12 @@ import (
 )
 
 type ObjectMeta struct {
-	Name              string                `json:"name,omitempty"`
+	Name              string                `json:"name"`
 	Namespace         string                `json:"namespace,omitempty"`
-	CreationTimestamp metav1.Time           `json:"creationTimestamp,omitempty"`
-	Labels            KubernetesLabels      `json:"labels,omitempty"`
-	Annotations       KubernetesAnnotations `json:"annotations,omitempty"`
-	OwnerReferences   OwnerReferences       `json:"ownerReferences,omitempty"`
+	CreationTimestamp metav1.Time           `json:"creationTimestamp"`
+	Labels            KubernetesLabels      `json:"labels"`
+	Annotations       KubernetesAnnotations `json:"annotations"`
+	OwnerReferences   OwnerReferences       `json:"ownerReferences"`
 }
 
 func NewObjectMeta(o metav1.ObjectMeta) ObjectMeta {
