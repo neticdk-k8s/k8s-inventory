@@ -78,8 +78,8 @@ type ResourceRequirements struct {
 	RequestsMemory           int64 `json:"requestsMemory"`
 	RequestsStorage          int64 `json:"requestsStorage"`
 	LimitsStorage            int64 `json:"limitsStorage"`
-	RequestsEphemeralStorage int64 `json:"requestsEphemeralStorage"`
-	LimitsEphemeralStorage   int64 `json:"limitsEphemeralStorage"`
+	RequestsStorageEphemeral int64 `json:"requestsStorageEphemeral"`
+	LimitsStorageEphemeral   int64 `json:"limitsStorageEphemeral"`
 }
 
 type VolumeMount struct {
