@@ -1,9 +1,6 @@
 package inventory
 
 import (
-	"database/sql/driver"
-	"encoding/json"
-	"errors"
 	"time"
 
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
@@ -37,17 +34,4 @@ func NewInventory() *Inventory {
 		CollectedAt:      metav1.Time{Time: time.Now()},
 		CollectionErrors: make([]string, 0),
 	}
-}
-
-func (i *Inventory) Value() (driver.Value, error) {
-	return json.Marshal(i)
-}
-
-func (i *Inventory) Scan(value interface{}) error {
-	b, ok := value.([]byte)
-	if !ok {
-		return errors.New("type assertion to []byte failed")
-	}
-
-	return json.Unmarshal(b, &i)
 }

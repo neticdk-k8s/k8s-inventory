@@ -14,37 +14,9 @@ type CronJobSpec struct {
 	JobTemplate       *PodTemplate `json:"jobTemplate"`
 }
 
-func (cs *CronJobSpec) Value() (driver.Value, error) {
-	bytes, err := json.Marshal(cs)
-	return bytes, err
-}
-
-func (cs *CronJobSpec) Scan(val interface{}) error {
-	b, ok := val.([]byte)
-	if !ok {
-		return errors.New("type assertion to []byte failed")
-	}
-
-	return json.Unmarshal(b, &cs)
-}
-
 type CronJobStatus struct {
 	LastScheduleTime   *metav1.Time `json:"lastScheduleTime,omitempty"`
 	LastSuccessfulTime *metav1.Time `json:"lastSuccessfulTime,omitempty"`
-}
-
-func (cs *CronJobStatus) Value() (driver.Value, error) {
-	bytes, err := json.Marshal(cs)
-	return bytes, err
-}
-
-func (cs *CronJobStatus) Scan(val interface{}) error {
-	b, ok := val.([]byte)
-	if !ok {
-		return errors.New("type assertion to []byte failed")
-	}
-
-	return json.Unmarshal(b, &cs)
 }
 
 func NewCronJob() *Workload {

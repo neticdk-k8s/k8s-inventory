@@ -125,20 +125,6 @@ type NetworkPolicySpec struct {
 	PolicyTypes []string                   `json:"policyTypes,omitempty"`
 }
 
-func (nps *NetworkPolicySpec) Value() (driver.Value, error) {
-	bytes, err := json.Marshal(nps)
-	return bytes, err
-}
-
-func (nps *NetworkPolicySpec) Scan(val interface{}) error {
-	b, ok := val.([]byte)
-	if !ok {
-		return errors.New("type assertion to []byte failed")
-	}
-
-	return json.Unmarshal(b, &nps)
-}
-
 func NewNetworkPolicy() *NetworkPolicy {
 	return &NetworkPolicy{
 		TypeMeta: TypeMeta{

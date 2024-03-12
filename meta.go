@@ -37,20 +37,6 @@ type OwnerReference struct {
 	Controller *bool  `json:"controller,omitempty"`
 }
 
-func (o *OwnerReferences) Scan(val interface{}) error {
-	b, ok := val.([]byte)
-	if !ok {
-		return errors.New("type assertion to []byte failed")
-	}
-
-	return json.Unmarshal(b, &o)
-}
-
-func (o *OwnerReferences) Value() (driver.Value, error) {
-	bytes, err := json.Marshal(o)
-	return bytes, err
-}
-
 type TypeMeta struct {
 	Kind         string `json:"kind"`
 	APIGroup     string `json:"apiGroup"`
@@ -60,35 +46,7 @@ type TypeMeta struct {
 
 type KubernetesLabels map[string]string
 
-func (kl *KubernetesLabels) Scan(val interface{}) error {
-	b, ok := val.([]byte)
-	if !ok {
-		return errors.New("type assertion to []byte failed")
-	}
-
-	return json.Unmarshal(b, &kl)
-}
-
-func (kl *KubernetesLabels) Value() (driver.Value, error) {
-	bytes, err := json.Marshal(kl)
-	return bytes, err
-}
-
 type KubernetesAnnotations map[string]string
-
-func (ka *KubernetesAnnotations) Value() (driver.Value, error) {
-	bytes, err := json.Marshal(ka)
-	return bytes, err
-}
-
-func (ka *KubernetesAnnotations) Scan(val interface{}) error {
-	b, ok := val.([]byte)
-	if !ok {
-		return errors.New("type assertion to []byte failed")
-	}
-
-	return json.Unmarshal(b, &ka)
-}
 
 type LabelSelectorRequirement struct {
 	Key      string   `json:"key"`
