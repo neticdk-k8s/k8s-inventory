@@ -2,7 +2,6 @@ package inventory
 
 import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
-	"sigs.k8s.io/controller-runtime/pkg/client"
 )
 
 type Pod struct {
@@ -12,7 +11,12 @@ type Pod struct {
 	Spec   PodSpec   `json:"spec,omitempty"`
 	Status PodStatus `json:"status,omitempty"`
 
-	RootOwner *client.Object `json:"rootOwner"`
+	RootOwner *RootOwner `json:"rootOwner"`
+}
+
+type RootOwner struct {
+	TypeMeta
+	ObjectMeta
 }
 
 func NewPod() *Pod {
