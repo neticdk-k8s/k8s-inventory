@@ -16,8 +16,8 @@ type KCIRocksDBInstance struct {
 	TypeMeta
 	ObjectMeta
 
-	Spec   KCIRocksDBInstanceSpec   `json:"spec" db:"spec"`
-	Status KCIRocksDBInstanceStatus `json:"status" db:"status"`
+	Spec   KCIRocksDBInstanceSpec   `json:"spec"`
+	Status KCIRocksDBInstanceStatus `json:"status"`
 }
 
 type KCIRocksDBInstanceSpec struct {

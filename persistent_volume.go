@@ -9,22 +9,22 @@ type PersistentVolume struct {
 	TypeMeta
 	ObjectMeta
 
-	Spec   PersistentVolumeSpec   `json:"spec" db:"spec"`
-	Status PersistentVolumeStatus `json:"status" db:"status"`
+	Spec   PersistentVolumeSpec   `json:"spec"`
+	Status PersistentVolumeStatus `json:"status"`
 
-	Source   string `json:"source" db:"source"`
-	Driver   string `json:"driver" db:"driver"`
-	Path     string `json:"path" db:"path"`
-	FSType   string `json:"fs_type" db:"fs_type"`
-	VolumeID string `json:"volume_id" db:"volume_id"`
+	Source   string `json:"source"`
+	Driver   string `json:"driver"`
+	Path     string `json:"path"`
+	FSType   string `json:"fsType"`
+	VolumeID string `json:"volumeID"`
 }
 
 type PersistentVolumeSpec struct {
 	Capacity         int64  `json:"capacity"`
-	AccessModes      string `json:"access_modes"`
+	AccessModes      string `json:"accessModes"`
 	Claim            string `json:"claim"`
-	StorageClassName string `json:"storage_class"`
-	VolumeMode       string `json:"volume_mode"`
+	StorageClassName string `json:"storageClassName"`
+	VolumeMode       string `json:"volumeMode"`
 }
 
 type PersistentVolumeStatus struct {

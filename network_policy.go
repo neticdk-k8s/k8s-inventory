@@ -1,9 +1,7 @@
 package inventory
 
 import (
-	"database/sql/driver"
 	"encoding/json"
-	"errors"
 
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 )
@@ -14,7 +12,7 @@ type NetworkPolicy struct {
 	TypeMeta
 	ObjectMeta
 
-	Spec NetworkPolicySpec `json:"spec" db:"spec"`
+	Spec NetworkPolicySpec `json:"spec"`
 }
 
 type NetworkPolicyPort struct {
@@ -123,20 +121,6 @@ type NetworkPolicySpec struct {
 	Ingress     []NetworkPolicyIngressRule `json:"ingress,omitempty"`
 	Egress      []NetworkPolicyEgressRule  `json:"egress,omitempty"`
 	PolicyTypes []string                   `json:"policyTypes,omitempty"`
-}
-
-func (nps *NetworkPolicySpec) Value() (driver.Value, error) {
-	bytes, err := json.Marshal(nps)
-	return bytes, err
-}
-
-func (nps *NetworkPolicySpec) Scan(val interface{}) error {
-	b, ok := val.([]byte)
-	if !ok {
-		return errors.New("type assertion to []byte failed")
-	}
-
-	return json.Unmarshal(b, &nps)
 }
 
 func NewNetworkPolicy() *NetworkPolicy {

@@ -1,8 +1,8 @@
 package inventory
 
 type Storage struct {
-	StorageClasses    []*StorageClass     `json:"storageclasses"`
-	PersistentVolumes []*PersistentVolume `json:"persistentvolumes"`
+	StorageClasses    []*StorageClass     `json:"storageClasses"`
+	PersistentVolumes []*PersistentVolume `json:"persistentVolumes"`
 }
 
 func NewStorage() *Storage {

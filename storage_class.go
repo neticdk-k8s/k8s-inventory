@@ -6,7 +6,7 @@ type StorageClass struct {
 	TypeMeta
 	ObjectMeta
 
-	Provisioner string `json:"provisioner" db:"provisioner"`
+	Provisioner string `json:"provisioner"`
 }
 
 func NewStorageClass() *StorageClass {

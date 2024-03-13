@@ -1,14 +1,16 @@
 package inventory
 
-type Spec interface{}
-type Status interface{}
+type (
+	Spec   interface{}
+	Status interface{}
+)
 
 type Workload struct {
 	TypeMeta
 	ObjectMeta
 
-	Spec   Spec   `json:"spec" db:"spec"`
-	Status Status `json:"status" db:"status"`
+	Spec   Spec   `json:"spec"`
+	Status Status `json:"status"`
 }
 
 func NewWorkloads() []*Workload {
