@@ -3,7 +3,7 @@ package inventory
 import metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 
 type KCIRocks struct {
-	DBInstances []*KCIRocksDBInstance `json:"db_instances"`
+	DBInstances []*KCIRocksDBInstance `json:"dbInstances"`
 }
 
 func NewKCIRocks() *KCIRocks {

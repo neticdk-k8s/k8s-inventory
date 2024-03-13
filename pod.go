@@ -4,42 +4,6 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 )
 
-type Pod struct {
-	TypeMeta
-	ObjectMeta
-
-	Spec   PodSpec   `json:"spec,omitempty"`
-	Status PodStatus `json:"status,omitempty"`
-
-	RootOwner *RootOwner `json:"rootOwner"`
-}
-
-type RootOwner struct {
-	Kind       string `json:"kind"`
-	APIGroup   string `json:"apiGroup"`
-	APIVersion string `json:"apiVersion"`
-	Name       string `json:"name"`
-	Namespace  string `json:"namespace,omitempty"`
-}
-
-func NewPod() *Pod {
-	return &Pod{
-		TypeMeta: TypeMeta{
-			Kind:         "Pod",
-			APIGroup:     "core",
-			APIVersion:   "v1",
-			ResourceType: "pods",
-		},
-		ObjectMeta: NewObjectMeta(metav1.ObjectMeta{}),
-		Spec:       PodSpec{},
-		Status:     PodStatus{},
-	}
-}
-
-func NewPods() []*Pod {
-	return make([]*Pod, 0)
-}
-
 type PodSpec struct {
 	Volumes            []Volume            `json:"volumes,omitempty"`
 	InitContainers     []Container         `json:"initContainers,omitempty"`
@@ -80,6 +44,20 @@ type PodCondition struct {
 	Type    string `json:"type"`
 	Status  string `json:"status"`
 	Message string `json:"message,omitempty"`
+}
+
+func NewPod() *Workload {
+	return &Workload{
+		TypeMeta: TypeMeta{
+			Kind:         "Pod",
+			APIGroup:     "core",
+			APIVersion:   "v1",
+			ResourceType: "pods",
+		},
+		ObjectMeta: NewObjectMeta(metav1.ObjectMeta{}),
+		Spec:       PodSpec{},
+		Status:     PodStatus{},
+	}
 }
 
 type PodTemplate struct {

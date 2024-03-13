@@ -11,15 +11,14 @@ type Inventory struct {
 	Nodes               Nodes            `json:"nodes"`
 	Namespaces          Namespaces       `json:"namespaces"`
 	Workloads           []*Workload      `json:"workloads"`
-	Pods                []*Pod           `json:"pods"`
 	Storage             *Storage         `json:"storage"`
-	NetworkPolicies     NetworkPolicies  `json:"network_policies"`
-	CustomResources     *CustomResources `json:"custom_resources"`
-	CollectedAt         metav1.Time      `json:"collected_at"`
-	CollectionSucceeded bool             `json:"collection_succeeded"`
-	CollectionErrors    []string         `json:"collection_errors"`
-	ClientVersion       string           `json:"client_version"`
-	ClientCommit        string           `json:"client_commit"`
+	NetworkPolicies     NetworkPolicies  `json:"networkPolicies"`
+	CustomResources     *CustomResources `json:"customResources"`
+	CollectedAt         metav1.Time      `json:"collectedAt"`
+	CollectionSucceeded bool             `json:"collectionSucceeded"`
+	CollectionErrors    []string         `json:"collectionErrors"`
+	ClientVersion       string           `json:"clientVersion"`
+	ClientCommit        string           `json:"clientCommit"`
 }
 
 func NewInventory() *Inventory {

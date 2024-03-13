@@ -44,6 +44,7 @@ func (npp NetworkPolicyPort) MarshalJSON() ([]byte, error) {
 			EndPort:  npp.EndPort,
 		})
 	}
+	// str
 	return json.Marshal(struct {
 		Protocol *string `json:"protocol,omitempty"`
 		Port     *string `json:"port,omitempty"`

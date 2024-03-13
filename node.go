@@ -15,22 +15,22 @@ type Node struct {
 	Status NodeStatus `json:"status"`
 
 	Role           string `json:"role"`
-	IsControlPlane bool   `json:"is_control_plane"`
-	TopologyRegion string `json:"topology_region"`
-	TopologyZone   string `json:"topology_zone"`
+	IsControlPlane bool   `json:"isControlPlane"`
+	TopologyRegion string `json:"topologyRegion"`
+	TopologyZone   string `json:"topologyZone"`
 	Provider       string `json:"provider"`
 
-	KubeProxyVersion        string `json:"kube_proxy_version"`
-	KubeletVersion          string `json:"kubelet_version"`
-	KernelVersion           string `json:"kernel_version"`
-	CRIName                 string `json:"cri_name"`
-	CRIVersion              string `json:"cri_version"`
-	ContainerRuntimeVersion string `json:"container_runtime_version"`
+	KubeProxyVersion        string `json:"kubeProxyVersion"`
+	KubeletVersion          string `json:"kubeletVersion"`
+	KernelVersion           string `json:"kernelVersion"`
+	CRIName                 string `json:"criName"`
+	CRIVersion              string `json:"criVersion"`
+	ContainerRuntimeVersion string `json:"containerRuntimeVersion"`
 
-	MemoryCapacityBytes    int64 `json:"memory_capacity_bytes"`
-	MemoryAllocatableBytes int64 `json:"memory_allocatable_bytes"`
-	CPUCapacityMillis      int64 `json:"cpu_capacity_mi"`
-	CPUAllocatableMillis   int64 `json:"cpu_allocatable_mi"`
+	MemoryCapacityBytes    int64 `json:"memoryCapacityBytes"`
+	MemoryAllocatableBytes int64 `json:"memoryAllocatableBytes"`
+	CPUCapacityMillis      int64 `json:"cpuCapacityMillis"`
+	CPUAllocatableMillis   int64 `json:"cpuAllocatableMillis"`
 }
 
 type NodeSpec struct {

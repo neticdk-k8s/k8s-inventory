@@ -11,6 +11,8 @@ type Workload struct {
 
 	Spec   Spec   `json:"spec"`
 	Status Status `json:"status"`
+
+	RootOwner *RootOwner `json:"rootOwner"`
 }
 
 func NewWorkloads() []*Workload {
