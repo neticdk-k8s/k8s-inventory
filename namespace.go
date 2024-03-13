@@ -8,8 +8,8 @@ type Namespace struct {
 	TypeMeta
 	ObjectMeta
 
-	Spec   NamespaceSpec   `json:"spec" db:"spec"`
-	Status NamespaceStatus `json:"status" db:"status"`
+	Spec   NamespaceSpec   `json:"spec"`
+	Status NamespaceStatus `json:"status"`
 }
 
 type NamespaceSpec struct{}

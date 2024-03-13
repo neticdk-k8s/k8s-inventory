@@ -1,50 +1,95 @@
 package inventory
 
 import (
-	"strings"
-
-	corev1 "k8s.io/api/core/v1"
+	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 )
 
 type Pod struct {
-	PodName         string `json:"pod_name"`
-	PodNameFull     string `json:"pod_name_full"`
-	AppName         string `json:"app_name"`
-	Owner           string `json:"owner"`
-	FullVersion     string `json:"full_version"`
-	SemanticVersion string `json:"semantic_version"`
+	TypeMeta
+	ObjectMeta
+
+	Spec   PodSpec   `json:"spec,omitempty"`
+	Status PodStatus `json:"status,omitempty"`
+
+	RootOwner *RootOwner `json:"rootOwner"`
 }
 
-func NewPod(pod corev1.Pod) (pi *Pod) {
-	pi = &Pod{
-		PodNameFull: pod.Name,
-		PodName:     pod.Name,
-	}
-	if pod.OwnerReferences != nil && len(pod.OwnerReferences) > 0 {
-		pi.Owner = pod.OwnerReferences[0].Kind + "/" + pod.OwnerReferences[0].Name
-		pi.PodName = getPodNameFromKind(pod.OwnerReferences[0].Kind, pod.Name)
-	}
-	return
+type RootOwner struct {
+	Kind       string `json:"kind"`
+	APIGroup   string `json:"apiGroup"`
+	APIVersion string `json:"apiVersion"`
+	Name       string `json:"name"`
+	Namespace  string `json:"namespace,omitempty"`
 }
 
-func getPodNameFromKind(kind string, fullName string) string {
-	parts := strings.Split(fullName, "-")
-	if kind == "ReplicaSet" {
-		return strings.Join(parts[:len(parts)-2], "-")
-	} else if kind == "DaemonSet" || kind == "StatefulSet" || kind == "Job" || kind == "Node" {
-		return strings.Join(parts[:len(parts)-1], "-")
+func NewPod() *Pod {
+	return &Pod{
+		TypeMeta: TypeMeta{
+			Kind:         "Pod",
+			APIGroup:     "core",
+			APIVersion:   "v1",
+			ResourceType: "pods",
+		},
+		ObjectMeta: NewObjectMeta(metav1.ObjectMeta{}),
+		Spec:       PodSpec{},
+		Status:     PodStatus{},
 	}
-	return fullName
+}
+
+func NewPods() []*Pod {
+	return make([]*Pod, 0)
+}
+
+type PodSpec struct {
+	Volumes            []Volume            `json:"volumes,omitempty"`
+	InitContainers     []Container         `json:"initContainers,omitempty"`
+	Containers         []Container         `json:"containers"`
+	RestartPolicy      string              `json:"restartPolicy,omitempty"`
+	ServiceAccountName string              `json:"serviceAccountName,omitempty"`
+	NodeName           string              `json:"nodeName,omitempty"`
+	HostNetwork        bool                `json:"hostNetwork,omitempty"`
+	SecurityContext    *PodSecurityContext `json:"securityContext,omitempty"`
+	PriorityClassName  string              `json:"priorityClassName,omitempty"`
+	Priority           *int32              `json:"priority,omitempty"`
+	PreemptionPolicy   *string             `json:"preemptionPolicy,omitempty"`
+}
+
+type Volume struct {
+	Name   string `json:"name"`
+	Source string `json:"source"`
+}
+
+type PodSecurityContext struct {
+	RunAsUser          *int64  `json:"runAsUser,omitempty"`
+	RunAsGroup         *int64  `json:"runAsGroup,omitempty"`
+	RunAsNonRoot       *bool   `json:"runAsNonRoot,omitempty"`
+	SupplementalGroups []int64 `json:"supplementalGroups,omitempty"`
+}
+
+type PodStatus struct {
+	Phase                 string            `json:"phase,omitempty"`
+	Conditions            []PodCondition    `json:"conditions,omitempty"`
+	PodIP                 string            `json:"podIP,omitempty"`
+	StartTime             *metav1.Time      `json:"startTime,omitempty"`
+	InitContainerStatuses []ContainerStatus `json:"initContainerStatuses,omitempty"`
+	ContainerStatuses     []ContainerStatus `json:"containerStatuses,omitempty"`
+	QOSClass              string            `json:"qosClass,omitempty"`
+}
+
+type PodCondition struct {
+	Type    string `json:"type"`
+	Status  string `json:"status"`
+	Message string `json:"message,omitempty"`
 }
 
 type PodTemplate struct {
-	Containers     []*Container `json:"containers"`
-	InitContainers []*Container `json:"init_containers"`
+	Containers     []*PodTemplateContainer `json:"containers"`
+	InitContainers []*PodTemplateContainer `json:"init_containers"`
 }
 
 func NewPodTemplate() *PodTemplate {
 	return &PodTemplate{
-		Containers:     make([]*Container, 0),
-		InitContainers: make([]*Container, 0),
+		Containers:     make([]*PodTemplateContainer, 0),
+		InitContainers: make([]*PodTemplateContainer, 0),
 	}
 }
