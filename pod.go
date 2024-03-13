@@ -15,8 +15,11 @@ type Pod struct {
 }
 
 type RootOwner struct {
-	TypeMeta
-	ObjectMeta
+	Kind       string `json:"kind"`
+	APIGroup   string `json:"apiGroup"`
+	APIVersion string `json:"apiVersion"`
+	Name       string `json:"name"`
+	Namespace  string `json:"namespace,omitempty"`
 }
 
 func NewPod() *Pod {
