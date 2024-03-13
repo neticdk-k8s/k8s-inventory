@@ -11,7 +11,7 @@ type Inventory struct {
 	Nodes               Nodes            `json:"nodes"`
 	Namespaces          Namespaces       `json:"namespaces"`
 	Workloads           []*Workload      `json:"workloads"`
-	Pods                []*Pod           `json:"pods"`
+	// Pods                []*Pod           `json:"pods"`
 	Storage             *Storage         `json:"storage"`
 	NetworkPolicies     NetworkPolicies  `json:"network_policies"`
 	CustomResources     *CustomResources `json:"custom_resources"`
