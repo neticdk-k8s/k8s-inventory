@@ -62,7 +62,7 @@ func NewPod() *Workload {
 
 type PodTemplate struct {
 	Containers     []*PodTemplateContainer `json:"containers"`
-	InitContainers []*PodTemplateContainer `json:"init_containers"`
+	InitContainers []*PodTemplateContainer `json:"initContainers"`
 }
 
 func NewPodTemplate() *PodTemplate {
