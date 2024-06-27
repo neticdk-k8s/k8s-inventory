@@ -18,13 +18,15 @@ type ReplicaSetStatus struct {
 
 func NewReplicaSet() *Workload {
 	return &Workload{
-		TypeMeta: TypeMeta{
-			Kind:         "ReplicaSet",
-			APIGroup:     "apps",
-			APIVersion:   "v1",
-			ResourceType: "replicasets",
+		PartialObject: PartialObject{
+			TypeMeta: TypeMeta{
+				Kind:         "ReplicaSet",
+				APIGroup:     "apps",
+				APIVersion:   "v1",
+				ResourceType: "replicasets",
+			},
+			ObjectMeta: NewObjectMeta(metav1.ObjectMeta{}),
 		},
-		ObjectMeta: NewObjectMeta(metav1.ObjectMeta{}),
 		Spec: ReplicaSetSpec{
 			Template: NewPodTemplate(),
 		},

@@ -20,13 +20,15 @@ type DeploymentStatus struct {
 
 func NewDeployment() *Workload {
 	return &Workload{
-		TypeMeta: TypeMeta{
-			Kind:         "Deployment",
-			APIGroup:     "apps",
-			APIVersion:   "v1",
-			ResourceType: "deployments",
+		PartialObject: PartialObject{
+			TypeMeta: TypeMeta{
+				Kind:         "Deployment",
+				APIGroup:     "apps",
+				APIVersion:   "v1",
+				ResourceType: "deployments",
+			},
+			ObjectMeta: NewObjectMeta(metav1.ObjectMeta{}),
 		},
-		ObjectMeta: NewObjectMeta(metav1.ObjectMeta{}),
 		Spec: DeploymentSpec{
 			Template: NewPodTemplate(),
 		},

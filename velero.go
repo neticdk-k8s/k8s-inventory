@@ -5,24 +5,41 @@ import (
 )
 
 type Velero struct {
-	Schedules []*VeleroSchedule `json:"schedules"`
-	Backups   []*VeleroBackup   `json:"backups"`
+	Schedules VeleroSchedules `json:"schedules"`
+	Backups   VeleroBackups   `json:"backups"`
 }
 
 func NewVelero() *Velero {
 	return &Velero{
-		Schedules: make([]*VeleroSchedule, 0),
-		Backups:   make([]*VeleroBackup, 0),
+		Schedules: VeleroSchedules{},
+		Backups:   VeleroBackups{},
 	}
 }
 
+func (v *Velero) AddSchedule(s *VeleroSchedule) {
+	v.Schedules = v.Schedules.Add(s)
+}
+
+func (v *Velero) DeleteSchedule(s *VeleroSchedule) {
+	v.Schedules = v.Schedules.Delete(s)
+}
+
+func (v *Velero) AddBackup(b *VeleroBackup) {
+	v.Backups = v.Backups.Add(b)
+}
+
+func (v *Velero) DeleteBackup(b *VeleroBackup) {
+	v.Backups = v.Backups.Delete(b)
+}
+
 type VeleroSchedule struct {
-	TypeMeta
-	ObjectMeta
+	PartialObject
 
 	Spec   VeleroScheduleSpec   `json:"spec"`
 	Status VeleroScheduleStatus `json:"status"`
 }
+
+type VeleroSchedules = Set[*VeleroSchedule]
 
 type VeleroScheduleSpec struct {
 	Schedule           string          `json:"schedule"`
@@ -38,25 +55,28 @@ type VeleroScheduleStatus struct {
 
 func NewVeleroSchedule() *VeleroSchedule {
 	return &VeleroSchedule{
-		TypeMeta: TypeMeta{
-			Kind:         "Schedule",
-			APIGroup:     "velero.io",
-			APIVersion:   "v1",
-			ResourceType: "schedules",
+		PartialObject: PartialObject{
+			TypeMeta: TypeMeta{
+				Kind:         "Schedule",
+				APIGroup:     "velero.io",
+				APIVersion:   "v1",
+				ResourceType: "schedules",
+			},
+			ObjectMeta: NewObjectMeta(metav1.ObjectMeta{}),
 		},
-		ObjectMeta: NewObjectMeta(metav1.ObjectMeta{}),
-		Spec:       VeleroScheduleSpec{},
-		Status:     VeleroScheduleStatus{},
+		Spec:   VeleroScheduleSpec{},
+		Status: VeleroScheduleStatus{},
 	}
 }
 
 type VeleroBackup struct {
-	TypeMeta
-	ObjectMeta
+	PartialObject
 
 	Spec   VeleroBackupSpec   `json:"spec"`
 	Status VeleroBackupStatus `json:"status"`
 }
+
+type VeleroBackups = Set[*VeleroBackup]
 
 type VeleroBackupSpec struct {
 	ScheduleName       string          `json:"scheduleName"`
@@ -80,14 +100,16 @@ type VeleroBackupStatus struct {
 
 func NewVeleroBackup() *VeleroBackup {
 	return &VeleroBackup{
-		TypeMeta: TypeMeta{
-			Kind:         "Backup",
-			APIGroup:     "velero.io",
-			APIVersion:   "v1",
-			ResourceType: "backups",
+		PartialObject: PartialObject{
+			TypeMeta: TypeMeta{
+				Kind:         "Backup",
+				APIGroup:     "velero.io",
+				APIVersion:   "v1",
+				ResourceType: "backups",
+			},
+			ObjectMeta: NewObjectMeta(metav1.ObjectMeta{}),
 		},
-		ObjectMeta: NewObjectMeta(metav1.ObjectMeta{}),
-		Spec:       VeleroBackupSpec{},
-		Status:     VeleroBackupStatus{},
+		Spec:   VeleroBackupSpec{},
+		Status: VeleroBackupStatus{},
 	}
 }

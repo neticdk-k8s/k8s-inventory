@@ -6,8 +6,7 @@ type (
 )
 
 type Workload struct {
-	TypeMeta
-	ObjectMeta
+	PartialObject
 
 	Spec   Spec   `json:"spec"`
 	Status Status `json:"status"`
@@ -15,6 +14,4 @@ type Workload struct {
 	RootOwner *RootOwner `json:"rootOwner,omitempty"`
 }
 
-func NewWorkloads() []*Workload {
-	return make([]*Workload, 0)
-}
+type Workloads = Set[*Workload]

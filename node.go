@@ -5,11 +5,10 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 )
 
-type Nodes []*Node
+type Nodes = Set[*Node]
 
 type Node struct {
-	TypeMeta
-	ObjectMeta
+	PartialObject
 
 	Spec   NodeSpec   `json:"spec"`
 	Status NodeStatus `json:"status"`
@@ -46,14 +45,16 @@ type NodeStatus struct {
 
 func NewNode() *Node {
 	return &Node{
-		TypeMeta: TypeMeta{
-			Kind:         "Node",
-			APIGroup:     "core",
-			APIVersion:   "v1",
-			ResourceType: "nodes",
+		PartialObject: PartialObject{
+			TypeMeta: TypeMeta{
+				Kind:         "Node",
+				APIGroup:     "core",
+				APIVersion:   "v1",
+				ResourceType: "nodes",
+			},
+			ObjectMeta: NewObjectMeta(metav1.ObjectMeta{}),
 		},
-		ObjectMeta: NewObjectMeta(metav1.ObjectMeta{}),
-		Spec:       NodeSpec{},
-		Status:     NodeStatus{},
+		Spec:   NodeSpec{},
+		Status: NodeStatus{},
 	}
 }

@@ -13,6 +13,23 @@ type ObjectMeta struct {
 	OwnerReferences   OwnerReferences       `json:"ownerReferences"`
 }
 
+func (o *ObjectMeta) SetFromObjectMeta(om metav1.ObjectMeta) {
+	o.Name = om.Name
+	o.Namespace = om.Namespace
+	o.Labels = getLabels(om)
+	o.Annotations = filterAnnotations(om)
+	o.CreationTimestamp = om.CreationTimestamp
+	o.OwnerReferences = getOwnerReferences(om)
+}
+
+func (o *ObjectMeta) GetName() string {
+	return o.Name
+}
+
+func (o *ObjectMeta) GetNamespace() string {
+	return o.Namespace
+}
+
 func NewObjectMeta(o metav1.ObjectMeta) ObjectMeta {
 	return ObjectMeta{
 		Name:              o.Name,
@@ -38,6 +55,22 @@ type TypeMeta struct {
 	APIGroup     string `json:"apiGroup"`
 	ResourceType string `json:"resourceType"`
 	APIVersion   string `json:"apiVersion"`
+}
+
+func (t *TypeMeta) GetKind() string {
+	return t.Kind
+}
+
+func (t *TypeMeta) GetAPIGroup() string {
+	return t.APIGroup
+}
+
+func (t *TypeMeta) GetResourceType() string {
+	return t.ResourceType
+}
+
+func (t *TypeMeta) GetAPIVersion() string {
+	return t.APIVersion
 }
 
 type KubernetesLabels map[string]string

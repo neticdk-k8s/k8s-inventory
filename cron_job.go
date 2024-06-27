@@ -17,13 +17,15 @@ type CronJobStatus struct {
 
 func NewCronJob() *Workload {
 	return &Workload{
-		TypeMeta: TypeMeta{
-			Kind:         "CronJob",
-			APIGroup:     "batch",
-			APIVersion:   "v1",
-			ResourceType: "cronjobs",
+		PartialObject: PartialObject{
+			TypeMeta: TypeMeta{
+				Kind:         "CronJob",
+				APIGroup:     "batch",
+				APIVersion:   "v1",
+				ResourceType: "cronjobs",
+			},
+			ObjectMeta: NewObjectMeta(metav1.ObjectMeta{}),
 		},
-		ObjectMeta: NewObjectMeta(metav1.ObjectMeta{}),
 		Spec: CronJobSpec{
 			JobTemplate: NewPodTemplate(),
 		},

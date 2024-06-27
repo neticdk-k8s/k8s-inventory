@@ -21,13 +21,15 @@ type StatefulSetStatus struct {
 
 func NewStatefulSet() *Workload {
 	return &Workload{
-		TypeMeta: TypeMeta{
-			Kind:         "StatefulSet",
-			APIGroup:     "apps",
-			APIVersion:   "v1",
-			ResourceType: "statefulsets",
+		PartialObject: PartialObject{
+			TypeMeta: TypeMeta{
+				Kind:         "StatefulSet",
+				APIGroup:     "apps",
+				APIVersion:   "v1",
+				ResourceType: "statefulsets",
+			},
+			ObjectMeta: NewObjectMeta(metav1.ObjectMeta{}),
 		},
-		ObjectMeta: NewObjectMeta(metav1.ObjectMeta{}),
 		Spec: StatefulSetSpec{
 			Template: NewPodTemplate(),
 		},
