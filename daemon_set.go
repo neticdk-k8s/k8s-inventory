@@ -17,13 +17,15 @@ type DaemonSetStatus struct {
 
 func NewDaemonSet() *Workload {
 	return &Workload{
-		TypeMeta: TypeMeta{
-			Kind:         "DaemonSet",
-			APIGroup:     "apps",
-			APIVersion:   "v1",
-			ResourceType: "daemonsets",
+		PartialObject: PartialObject{
+			TypeMeta: TypeMeta{
+				Kind:         "DaemonSet",
+				APIGroup:     "apps",
+				APIVersion:   "v1",
+				ResourceType: "daemonsets",
+			},
+			ObjectMeta: NewObjectMeta(metav1.ObjectMeta{}),
 		},
-		ObjectMeta: NewObjectMeta(metav1.ObjectMeta{}),
 		Spec: DaemonSetSpec{
 			Template: NewPodTemplate(),
 		},

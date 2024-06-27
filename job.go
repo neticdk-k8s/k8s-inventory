@@ -22,13 +22,15 @@ type JobStatus struct {
 
 func NewJob() *Workload {
 	return &Workload{
-		TypeMeta: TypeMeta{
-			Kind:         "Job",
-			APIGroup:     "batch",
-			APIVersion:   "v1",
-			ResourceType: "jobs",
+		PartialObject: PartialObject{
+			TypeMeta: TypeMeta{
+				Kind:         "Job",
+				APIGroup:     "batch",
+				APIVersion:   "v1",
+				ResourceType: "jobs",
+			},
+			ObjectMeta: NewObjectMeta(metav1.ObjectMeta{}),
 		},
-		ObjectMeta: NewObjectMeta(metav1.ObjectMeta{}),
 		Spec: JobSpec{
 			Template: NewPodTemplate(),
 		},

@@ -48,15 +48,17 @@ type PodCondition struct {
 
 func NewPod() *Workload {
 	return &Workload{
-		TypeMeta: TypeMeta{
-			Kind:         "Pod",
-			APIGroup:     "core",
-			APIVersion:   "v1",
-			ResourceType: "pods",
+		PartialObject: PartialObject{
+			TypeMeta: TypeMeta{
+				Kind:         "Pod",
+				APIGroup:     "core",
+				APIVersion:   "v1",
+				ResourceType: "pods",
+			},
+			ObjectMeta: NewObjectMeta(metav1.ObjectMeta{}),
 		},
-		ObjectMeta: NewObjectMeta(metav1.ObjectMeta{}),
-		Spec:       PodSpec{},
-		Status:     PodStatus{},
+		Spec:   PodSpec{},
+		Status: PodStatus{},
 	}
 }
 

@@ -6,8 +6,7 @@ type (
 )
 
 type Workload struct {
-	TypeMeta
-	ObjectMeta
+	PartialObject
 
 	Spec   Spec   `json:"spec"`
 	Status Status `json:"status"`
