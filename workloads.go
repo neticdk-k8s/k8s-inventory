@@ -14,6 +14,4 @@ type Workload struct {
 	RootOwner *RootOwner `json:"rootOwner,omitempty"`
 }
 
-func NewWorkloads() []*Workload {
-	return make([]*Workload, 0)
-}
+type Workloads = Set[*Workload]

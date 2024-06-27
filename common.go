@@ -41,3 +41,26 @@ func (p *PartialObject) EqualTo(o Object) bool {
 	return p.APIGroup == o.GetAPIGroup() && p.APIVersion == o.GetAPIVersion() && p.Kind == o.GetKind() &&
 		p.Name == o.GetName() && p.Namespace == o.GetNamespace()
 }
+
+// Set is a set like structure based on the EqualTo methods of the given objects
+type Set[I Object] []I
+
+func (s Set[I]) Add(obj Object) Set[I] {
+	o := obj.(I)
+	for n, e := range s {
+		if obj.EqualTo(e) {
+			s[n] = o
+			return s
+		}
+	}
+	return append(s, obj.(I))
+}
+
+func (s Set[I]) Delete(obj Object) Set[I] {
+	for n, e := range s {
+		if obj.EqualTo(e) {
+			return append(s[:n], s[n+1:]...)
+		}
+	}
+	return s
+}

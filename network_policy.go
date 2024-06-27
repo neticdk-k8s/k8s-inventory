@@ -6,11 +6,10 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 )
 
-type NetworkPolicies []*NetworkPolicy
+type NetworkPolicies = Set[*NetworkPolicy]
 
 type NetworkPolicy struct {
-	TypeMeta
-	ObjectMeta
+	PartialObject
 
 	Spec NetworkPolicySpec `json:"spec"`
 }
@@ -126,13 +125,15 @@ type NetworkPolicySpec struct {
 
 func NewNetworkPolicy() *NetworkPolicy {
 	return &NetworkPolicy{
-		TypeMeta: TypeMeta{
-			Kind:         "NetworkPolicy",
-			APIGroup:     "networking",
-			APIVersion:   "v1",
-			ResourceType: "networkpolicies",
+		PartialObject: PartialObject{
+			TypeMeta: TypeMeta{
+				Kind:         "NetworkPolicy",
+				APIGroup:     "networking",
+				APIVersion:   "v1",
+				ResourceType: "networkpolicies",
+			},
+			ObjectMeta: NewObjectMeta(metav1.ObjectMeta{}),
 		},
-		ObjectMeta: NewObjectMeta(metav1.ObjectMeta{}),
 		Spec: NetworkPolicySpec{
 			PodSelector: LabelSelector{},
 			Ingress:     make([]NetworkPolicyIngressRule, 0),

@@ -6,8 +6,7 @@ import (
 )
 
 type PersistentVolume struct {
-	TypeMeta
-	ObjectMeta
+	PartialObject
 
 	Spec   PersistentVolumeSpec   `json:"spec"`
 	Status PersistentVolumeStatus `json:"status"`
@@ -18,6 +17,8 @@ type PersistentVolume struct {
 	FSType   string `json:"fsType"`
 	VolumeID string `json:"volumeID"`
 }
+
+type PersistentVolumes = Set[*PersistentVolume]
 
 type PersistentVolumeSpec struct {
 	Capacity         int64  `json:"capacity"`
@@ -34,15 +35,17 @@ type PersistentVolumeStatus struct {
 
 func NewPersistentVolume() *PersistentVolume {
 	return &PersistentVolume{
-		TypeMeta: TypeMeta{
-			Kind:         "PersistentVolume",
-			APIGroup:     "core",
-			APIVersion:   "v1",
-			ResourceType: "persistentvolumes",
+		PartialObject: PartialObject{
+			TypeMeta: TypeMeta{
+				Kind:         "PersistentVolume",
+				APIGroup:     "core",
+				APIVersion:   "v1",
+				ResourceType: "persistentvolumes",
+			},
+			ObjectMeta: NewObjectMeta(metav1.ObjectMeta{}),
 		},
-		ObjectMeta: NewObjectMeta(metav1.ObjectMeta{}),
-		Spec:       PersistentVolumeSpec{},
-		Status:     PersistentVolumeStatus{},
+		Spec:   PersistentVolumeSpec{},
+		Status: PersistentVolumeStatus{},
 	}
 }
 

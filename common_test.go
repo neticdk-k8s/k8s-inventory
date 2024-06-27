@@ -76,3 +76,19 @@ func TestEqualTo(t *testing.T) {
 		assert.Equal(t, tt.result, result)
 	}
 }
+
+func TestSetAdd(t *testing.T) {
+	set := Set[*PartialObject]{}
+	res := set.Add(&PartialObject{})
+	assert.Len(t, res, 1)
+
+	res = set.Add(&PartialObject{})
+	assert.Len(t, res, 1)
+}
+
+func TestSetDelete(t *testing.T) {
+	set := Set[*PartialObject]{&PartialObject{}}
+
+	res := set.Delete(&PartialObject{})
+	assert.Len(t, res, 0)
+}

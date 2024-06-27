@@ -3,22 +3,31 @@ package inventory
 import metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 
 type RabbitMQ struct {
-	Clusters []*RabbitMQCluster `json:"clusters"`
+	Clusters RabbitMQClusters `json:"clusters"`
 }
 
 func NewRabbitMQ() *RabbitMQ {
 	return &RabbitMQ{
-		Clusters: make([]*RabbitMQCluster, 0),
+		Clusters: RabbitMQClusters{},
 	}
 }
 
+func (r *RabbitMQ) AddCluster(c *RabbitMQCluster) {
+	r.Clusters = r.Clusters.Add(c)
+}
+
+func (r *RabbitMQ) DeleteCluster(c *RabbitMQCluster) {
+	r.Clusters = r.Clusters.Delete(c)
+}
+
 type RabbitMQCluster struct {
-	TypeMeta
-	ObjectMeta
+	PartialObject
 
 	Spec   RabbitMQClusterSpec   `json:"spec"`
 	Status RabbitMQClusterStatus `json:"status"`
 }
+
+type RabbitMQClusters = Set[*RabbitMQCluster]
 
 type RabbitMQClusterSpec struct {
 	Replicas *int32 `json:"replicas"`
@@ -29,14 +38,16 @@ type RabbitMQClusterStatus struct{}
 
 func NewRabbitMQCluster() *RabbitMQCluster {
 	return &RabbitMQCluster{
-		TypeMeta: TypeMeta{
-			Kind:         "RabbitmqCluster",
-			APIGroup:     "rabbitmq.com",
-			APIVersion:   "v1beta1",
-			ResourceType: "rabbitmqclusters",
+		PartialObject: PartialObject{
+			TypeMeta: TypeMeta{
+				Kind:         "RabbitmqCluster",
+				APIGroup:     "rabbitmq.com",
+				APIVersion:   "v1beta1",
+				ResourceType: "rabbitmqclusters",
+			},
+			ObjectMeta: NewObjectMeta(metav1.ObjectMeta{}),
 		},
-		ObjectMeta: NewObjectMeta(metav1.ObjectMeta{}),
-		Spec:       RabbitMQClusterSpec{},
-		Status:     RabbitMQClusterStatus{},
+		Spec:   RabbitMQClusterSpec{},
+		Status: RabbitMQClusterStatus{},
 	}
 }
