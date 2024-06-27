@@ -51,6 +51,14 @@ func (i *Inventory) DeleteNode(n *Node) {
 	i.Nodes = i.Nodes.Delete(n)
 }
 
+func (i *Inventory) AddNamespace(n *Namespace) {
+	i.Namespaces = i.Namespaces.Add(n)
+}
+
+func (i *Inventory) DeleteNamespace(n *Namespace) {
+	i.Namespaces = i.Namespaces.Delete(n)
+}
+
 func (i *Inventory) AddNetworkPolicy(n *NetworkPolicy) {
 	i.NetworkPolicies = i.NetworkPolicies.Add(n)
 }
