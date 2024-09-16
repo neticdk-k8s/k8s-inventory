@@ -57,6 +57,12 @@ type TypeMeta struct {
 	APIVersion   string `json:"apiVersion"`
 }
 
+func (t *TypeMeta) SetFromTypeMeta(tm metav1.TypeMeta) {
+	t.Kind = tm.Kind
+	t.APIGroup = tm.GroupVersionKind().Group
+	t.APIVersion = tm.APIVersion
+}
+
 func (t *TypeMeta) GetKind() string {
 	return t.Kind
 }

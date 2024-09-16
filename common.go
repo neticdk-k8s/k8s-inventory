@@ -29,6 +29,7 @@ type Object interface {
 	GetName() string
 	GetNamespace() string
 	SetFromObjectMeta(om metav1.ObjectMeta)
+	SetFromTypeMeta(tm metav1.TypeMeta)
 	EqualTo(o Object) bool
 }
 
